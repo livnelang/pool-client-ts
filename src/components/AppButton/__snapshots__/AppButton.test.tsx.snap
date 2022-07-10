@@ -1,0 +1,9 @@
+// Vitest Snapshot v1
+
+exports[`Link changes the class when hovered 1`] = `
+<div
+  className="AppButton primary"
+>
+  Button Test
+</div>
+`;

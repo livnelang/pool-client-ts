@@ -1,0 +1,37 @@
+.SlideInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #93989B;
+}
+
+.SlideInfo .mainText {
+    font-size: 18px;
+    color: #263238;
+}
+
+.SlideInfo .secondaryText {
+    font-size: 14px;  
+    color: #93989B;
+}
+
+
+.SlideInfo .texts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 69px;
+    margin-bottom: 77px;
+    font-weight: 600;
+    direction: rtl;
+}
+
+.SlideInfo .slideImage {
+    animation: slideFadeIn 1s;
+}
+
+
+@keyframes slideFadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}

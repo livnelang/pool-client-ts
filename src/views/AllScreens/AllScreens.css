@@ -1,0 +1,45 @@
+.AllComponents {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 32px;
+}
+
+.AllComponents h4 {
+    margin-bottom: 16px;
+}
+
+.AllComponents ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+}
+
+.AllComponents ul li {
+    color: blue;
+    text-decoration-line: underline;
+    margin-bottom: 8px;
+}
+
+.selectedElementContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.selectedElementContainer .topPanel {
+    display: flex;
+    margin-bottom: 24px;
+}
+
+.selectedElementContainer .topPanel span {
+    font-weight: 600;
+    color: cornflowerblue;
+}
+
+.selectedElementContainer .componentName {
+    text-align: left;
+    margin-bottom: 16px;
+}

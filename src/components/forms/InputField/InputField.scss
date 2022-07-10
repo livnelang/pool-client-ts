@@ -1,0 +1,40 @@
+.InputField {
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+
+    input {
+        background: #F2F7FF;
+        border-radius: 8px;
+        border: none;
+        padding: 16px;
+        text-align: right;
+        font-size: 16px;
+
+        &.error {
+            animation: shakyErrorInput 420ms;
+        }
+    }
+
+    label {
+        margin-bottom: 8px;
+        font-size: 18px;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    .input-label-error {
+        color: #db4343;
+    }
+}
+
+
+@keyframes shakyErrorInput {
+    0% {transform: translateX(10px);}
+    25% {transform: translateX(-10px);}
+    50% {transform: translateX(10px);}
+    75% {transform: translateX(-10px);}
+    100% {transform: translateX(10px);}
+}

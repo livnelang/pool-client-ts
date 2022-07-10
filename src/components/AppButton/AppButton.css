@@ -1,0 +1,27 @@
+.AppButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFFFF;
+    padding: 19px 32px;
+    border-radius: 32px;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+}
+
+.AppButton.primary {
+    background: var(--cta);
+    color: #FFFFFFFF;
+}
+
+.AppButton.grey {
+    background: #F4F5F7;
+    color: var(--main);
+}
+
+.AppButton.transparent {
+    background: transparent;
+    border: 1px solid #D0DBEA;
+    color: var(--main);
+}

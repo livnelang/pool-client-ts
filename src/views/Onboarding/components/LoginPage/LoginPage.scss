@@ -1,0 +1,45 @@
+.LoginPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .ImgContainer {
+        img {
+            height: 250px;
+            width: 100%;
+        }
+    }
+
+    .description {
+        text-align: center;
+        direction: rtl;
+
+        .topText {
+            margin: 0;
+        }
+    
+        .secondaryText {
+            color: #6C6C6C;
+            margin: 0;
+            margin-top: 8px;
+        }
+    }
+
+    .formContainer {
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    .loginForm > * + * {
+        margin-top: 8px;
+    }
+
+    .AppButton {
+        margin-top: 16px;
+        direction: rtl;
+
+        .spinner {
+            margin-right: 8px;
+        }
+    }
+}

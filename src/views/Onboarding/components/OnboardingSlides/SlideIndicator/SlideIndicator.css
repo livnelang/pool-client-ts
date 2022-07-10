@@ -1,0 +1,27 @@
+.SlideIndicator {
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.SlideIndicator > * + * {
+    margin-inline-start: 8px;
+}
+
+.SlideIndicator .bar {
+    width: 24px;
+    height: 8px;
+    background: #D9D9D9;
+    border-radius: 16px;
+}
+
+.SlideIndicator .bar.activeBar {
+    animation: example 0.1s forwards;
+}
+
+
+@keyframes example {
+    from {width: #D9D9D9; }
+    to {background: var(--cta);
+        width: 42px;
+}
+}
