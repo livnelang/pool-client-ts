@@ -41,7 +41,7 @@ const componentsPreview: ComponentPreview[] = [
   },
   {
     name: "Onboarding Slides",
-    element: <OnboardingSlides />,
+    element: <OnboardingSlides onLastSlidingClick={() => null}/>,
   },
   {
     name: "Menu Item",
