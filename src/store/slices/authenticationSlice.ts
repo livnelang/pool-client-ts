@@ -23,11 +23,17 @@ const authSlice = createSlice({
       state.loggedUser = payload.loginResponse.loggedUser;
       state.mails = payload.loginResponse.mails;
     },
+    removeLoggedUser: (
+      state,
+    ) => {
+      state.loggedUser = null;
+      state.mails = null
+    },
   },
 });
 
 // ACTIONS
-export const { setLoginResponse: setLoginResponse } = authSlice.actions;
+export const { setLoginResponse: setLoginResponse, removeLoggedUser: removeLoggedUser } = authSlice.actions;
 
 // REDUCER
 export default authSlice;

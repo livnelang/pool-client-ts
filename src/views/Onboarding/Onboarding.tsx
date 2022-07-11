@@ -2,7 +2,7 @@ import "./Onboarding.scss";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/rtkStore";
-import APIService from "../../helpers/API";
+import APIService from "../../helpers/api/API";
 import LoginPage from "./components/LoginPage/LoginPage";
 import OnboardingSlides from "./components/OnboardingSlides/OnboardingSlides";
 import { LoginResponse } from "../../interfaces/Authentication";
