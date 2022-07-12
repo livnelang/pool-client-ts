@@ -1,13 +1,26 @@
 import "./Main.scss";
 import Menu from "../Menu/Menu";
 import {
-    AiOutlineHome,
-    AiOutlineCalendar,
-    AiOutlineBarcode,
-    AiOutlineUserAdd,
-  } from "react-icons/ai";
+  AiOutlineHome,
+  AiOutlineCalendar,
+  AiOutlineBarcode,
+  AiOutlineUserAdd,
+} from "react-icons/ai";
+import APIService from "../../helpers/api/API";
+import { useEffect } from "react";
 
-const Main = () => {
+interface MainProps {
+  api: APIService;
+}
+
+const Main = (props: MainProps) => {
+  useEffect(() => {
+    const getAllClients = async () => {
+      const allClients = await props.api.getAllClients();
+      console.log("allClinets res: ", allClients);
+    };
+    getAllClients();
+  }, []);
   return (
     <div className="Main">
       <h2>Hello Main0.1!</h2>

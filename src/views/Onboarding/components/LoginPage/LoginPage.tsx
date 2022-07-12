@@ -1,7 +1,7 @@
 import "./LoginPage.scss";
 import OnboardingImg from "../../../../assets/images/onboarding_top_image.svg";
 import { useDispatch } from "react-redux";
-import APIService from "../../../../helpers/API";
+import APIService from "../../../../helpers/api/API";
 import { useRef, useState } from "react";
 import AppButton from "../../../../components/AppButton/AppButton";
 import InputField from "../../../../components/forms/InputField/InputField";
