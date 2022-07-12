@@ -10,7 +10,7 @@ import {
 const Main = () => {
   return (
     <div className="Main">
-      <h2>Hello Main!</h2>
+      <h2>Hello Main0.1!</h2>
       <Menu
         items={[
           { text: "בית", icon: <AiOutlineHome />, isActive: true },
