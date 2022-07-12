@@ -1,7 +1,8 @@
 import axios from "axios";
 import { LoginRequest, LoginResponse } from "../interfaces/Authentication";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+// const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = "https://oz-pool.herokuapp.com/";
 class APIService {
 //   public async getItems(): Promise<Recipes> {
 //     return axios.get(BASE_URL + "recipes");

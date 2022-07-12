@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { RouteProps, Route } from "react-router";
 import { Navigate, Outlet } from "react-router-dom";
-import { RootState } from "../../../../recipes-client/src/store/rtkStore";
+import { RootState } from "../../store/rtkStore";
 
 export const ProtectedRoute = (props: RouteProps) => {
   const authenticationPath = "/";
