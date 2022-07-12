@@ -2,8 +2,8 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { LoginRequest, LoginResponse } from "../../interfaces/Authentication";
 import { setupInterceptorsTo } from "./interceptors";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-// const BASE_URL = "https://oz-pool.herokuapp.com/api/";
+// const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = "https://oz-pool.herokuapp.com/api/";
 
 // setupInterceptorsTo(axios);
 
