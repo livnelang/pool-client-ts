@@ -8,12 +8,23 @@ import {
 } from "react-icons/ai";
 import APIService from "../../helpers/api/API";
 import { useEffect } from "react";
+import ProfileBar from "../ProfileBar/ProfileBar";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/rtkStore";
 
 interface MainProps {
   api: APIService;
 }
 
 const Main = (props: MainProps) => {
+  const loggedUser = useSelector(
+    (state: RootState) => state.auth.loggedUser
+  );
+
+  if (loggedUser === null) {
+    throw Error("Cannot initiate main screen without being logged in");
+  }
+
   useEffect(() => {
     const getAllClients = async () => {
       const allClients = await props.api.getAllClients();
@@ -23,7 +34,7 @@ const Main = (props: MainProps) => {
   }, []);
   return (
     <div className="Main">
-      <h2>Hello Main0.1!</h2>
+      <ProfileBar userName={loggedUser.userName}/>
       <Menu
         items={[
           { text: "בית", icon: <AiOutlineHome />, isActive: true },

@@ -11,6 +11,7 @@ import {
 } from "react-icons/ai";
 import Menu from "../../components/Menu/Menu";
 import AppModal from "../../components/AppModal/AppModal";
+import ProfileBar from "../../components/ProfileBar/ProfileBar";
 
 interface ComponentPreview {
   name: string;
@@ -78,6 +79,10 @@ const componentsPreview: ComponentPreview[] = [
       onCloseModal={() => { }}
       text={"נושא מסוים"}
       secondaryText="מאחורי היער אחת שתיים שלוש" />,
+  },
+  {
+    name: "Profile Bar",
+    element: <ProfileBar userName="ארצי בנקר"/>,
   },
 ];
 

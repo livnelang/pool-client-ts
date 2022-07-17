@@ -1,0 +1,39 @@
+.ProfileBar {
+    direction: rtl;
+    display: flex;
+    justify-content: space-between;
+    color: #9D9CB5;
+
+    .profileDetails {
+        display: flex;
+
+        .texts {
+            margin-right: 8px;
+            font-size: 10px;
+
+            .welcome {
+                font-weight: 400;
+            }
+    
+            .userName {
+                font-weight: 600;
+            }
+        }
+
+
+
+        .avatarBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 44px;
+            height: 44px;
+            background: #FFDE99;
+            border-radius: 10px;
+        }
+    }
+    
+    .logoutText {
+        font-size: 10px;
+    }
+}

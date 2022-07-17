@@ -6,7 +6,8 @@
     position: relative;
 
     .Menu {
-        position: absolute;
-        bottom: 0;
+        position: fixed;
+        bottom: 24px;
+        left: 0
     }
 }
