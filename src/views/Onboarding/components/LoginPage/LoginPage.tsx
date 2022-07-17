@@ -10,6 +10,7 @@ import { setLoginResponse } from "../../../../store/slices/authenticationSlice";
 import useLoginPageHook from "./hooks/useLoginPageHook";
 import { CgSpinner } from "react-icons/cg";
 import { LoginResponse } from "../../../../interfaces/Authentication";
+import AppModal from "../../../../components/AppModal/AppModal";
 
 export interface FormFields {
   email: string;
@@ -30,6 +31,8 @@ const LoginPage = (props: LoginPageProps) => {
   const { loginDetails, handleLoginFormFieldChange, validateLoginForm } =
     useLoginPageHook();
   const [isLoading, setisLoading] = useState<boolean>(false);
+  const [showFailedLoginModal, setshowFailedLoginModal] =
+    useState<boolean>(false);
   const { login } = props.api;
   const mailInputRef = useRef<any>(null);
 
@@ -48,57 +51,67 @@ const LoginPage = (props: LoginPageProps) => {
     login(loginDetails.fields)
       .then((res) => {
         console.log(res);
-        props.onSuccessFullLogin(res)
+        props.onSuccessFullLogin(res);
         // disptach(setLoginResponse({ loginResponse: res }));
       })
-      .catch((err) => console.log(err))
+      .catch((err) => setshowFailedLoginModal(true))
       .finally(() => setisLoading(false));
   };
 
   return (
-    <div className="LoginPage">
-      <div className="ImgContainer">
-        <img src={OnboardingImg} alt="" />
-      </div>
-      <div className="description">
-        <h2 className="topText">הבריכה של עוזן</h2>
-        <p className="secondaryText">
-          המקום בו הכל קורה, החבר’ה יושבים ועוד ..
-        </p>
-      </div>
+    <>
+      <div className="LoginPage">
+        <div className="ImgContainer">
+          <img src={OnboardingImg} alt="" />
+        </div>
+        <div className="description">
+          <h2 className="topText">הבריכה של עוזן</h2>
+          <p className="secondaryText">
+            המקום בו הכל קורה, החבר’ה יושבים ועוד ..
+          </p>
+        </div>
 
-      <div className="formContainer">
-        <form className="loginForm" onSubmit={handleClickSubmitForm}>
-          <InputField
-            ref={mailInputRef}
-            label="מייל"
-            type="email"
-            onChange={(e) =>
-              handleLoginFormFieldChange("email", e.target.value)
-            }
-            error={loginDetails.errors.email}
-          />
-          <InputField
-            label="סיסמא"
-            type="password"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-            onChange={(e) =>
-              handleLoginFormFieldChange("password", e.target.value)
-            }
-            error={loginDetails.errors.password}
-          />
-        </form>
-        <AppButton
-          disabled={isLoading}
-          text="התחבר"
-          onClick={() => {
-            handleClickSubmitForm();
-          }}
-        >
-          {isLoading ? <CgSpinner className="spinner" /> : null}
-        </AppButton>
+        <div className="formContainer">
+          <form className="loginForm" onSubmit={handleClickSubmitForm}>
+            <InputField
+              ref={mailInputRef}
+              label="מייל"
+              type="email"
+              onChange={(e) =>
+                handleLoginFormFieldChange("email", e.target.value)
+              }
+              error={loginDetails.errors.email}
+            />
+            <InputField
+              label="סיסמא"
+              type="password"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              onChange={(e) =>
+                handleLoginFormFieldChange("password", e.target.value)
+              }
+              error={loginDetails.errors.password}
+            />
+          </form>
+          <AppButton
+            disabled={isLoading}
+            text="התחבר"
+            onClick={() => {
+              handleClickSubmitForm();
+            }}
+          >
+            {isLoading ? <CgSpinner className="spinner" /> : null}
+          </AppButton>
+        </div>
       </div>
-    </div>
+      <AppModal
+        isOpen={showFailedLoginModal}
+        onCloseModal={() => setshowFailedLoginModal(false)}
+        text="שגיאה"
+        secondaryText="פרטי התחברות אינם נכונים"
+        confirmButtonText="אישור"
+        type="fail"
+      />
+    </>
   );
 };
 

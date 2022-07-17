@@ -4,7 +4,6 @@ import {
   AxiosInstance,
   AxiosError,
 } from "axios";
-import { useNavigate } from "react-router-dom";
 import { LoggedUser } from "../../interfaces/Authentication";
 import { store } from "../../store/rtkStore";
 import {
@@ -12,12 +11,8 @@ import {
   setLoginResponse,
 } from "../../store/slices/authenticationSlice";
 
-const loggedUser: LoggedUser | null = store.getState().auth.loggedUser;
-console.log("tore inerceptos: ", loggedUser);
-
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   const loggedUser: LoggedUser | null = store.getState().auth.loggedUser;
-  console.log("tore inerceptos: ", loggedUser);
 
   config.headers = config.headers || {};
 
@@ -35,15 +30,14 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
 };
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
-//   const navigate = useNavigate();
-  if (error.response?.status === 401) {
-    // disp
-    store.dispatch(removeLoggedUser()); 
+  const url = error.request.responseURL;
+  const isAuthenticateUrl = url.includes("api/authenticate");
+
+  if (error.response?.status === 401 && !isAuthenticateUrl) {
+    store.dispatch(removeLoggedUser());
     location.replace("/");
-    // setLoginResponse({ loginResponse: loginResponse })
   }
 
-  console.error(`[response error] [${JSON.stringify(error)}]`);
   return Promise.reject(error);
 };
 

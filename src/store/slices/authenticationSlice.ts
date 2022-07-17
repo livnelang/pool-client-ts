@@ -4,11 +4,13 @@ import { AppMails, LoggedUser, LoginResponse } from "../../interfaces/Authentica
 export interface AuthenticationState {
   loggedUser: LoggedUser | null;
   mails: AppMails | null;
+  seenOnboardingSlides: boolean;
 }
 
 const authenticationInitialState: AuthenticationState = {
   loggedUser: null,
-  mails: null
+  mails: null,
+  seenOnboardingSlides: false
 };
 
 // SLICES
@@ -23,6 +25,11 @@ const authSlice = createSlice({
       state.loggedUser = payload.loginResponse.loggedUser;
       state.mails = payload.loginResponse.mails;
     },
+    setSlidingIndicator: (
+      state,
+    ) => {
+      state.seenOnboardingSlides = !state.seenOnboardingSlides
+    },
     removeLoggedUser: (
       state,
     ) => {
@@ -33,7 +40,11 @@ const authSlice = createSlice({
 });
 
 // ACTIONS
-export const { setLoginResponse: setLoginResponse, removeLoggedUser: removeLoggedUser } = authSlice.actions;
+export const { 
+  setLoginResponse: setLoginResponse, 
+  removeLoggedUser: removeLoggedUser,
+  setSlidingIndicator: setSlidingIndicator
+} = authSlice.actions;
 
 // REDUCER
 export default authSlice;

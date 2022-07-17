@@ -10,6 +10,7 @@ import {
   AiOutlineUserAdd,
 } from "react-icons/ai";
 import Menu from "../../components/Menu/Menu";
+import AppModal from "../../components/AppModal/AppModal";
 
 interface ComponentPreview {
   name: string;
@@ -41,7 +42,7 @@ const componentsPreview: ComponentPreview[] = [
   },
   {
     name: "Onboarding Slides",
-    element: <OnboardingSlides onLastSlidingClick={() => null}/>,
+    element: <OnboardingSlides onLastSlidingClick={() => null} />,
   },
   {
     name: "Menu Item",
@@ -69,6 +70,14 @@ const componentsPreview: ComponentPreview[] = [
         ]}
       />
     ),
+  },
+  {
+    name: "App Modal",
+    element: <AppModal
+      isOpen={true}
+      onCloseModal={() => { }}
+      text={"נושא מסוים"}
+      secondaryText="מאחורי היער אחת שתיים שלוש" />,
   },
 ];
 

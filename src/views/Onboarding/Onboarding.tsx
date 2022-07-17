@@ -6,8 +6,7 @@ import APIService from "../../helpers/api/API";
 import LoginPage from "./components/LoginPage/LoginPage";
 import OnboardingSlides from "./components/OnboardingSlides/OnboardingSlides";
 import { LoginResponse } from "../../interfaces/Authentication";
-import { useEffect, useState } from "react";
-import { setLoginResponse } from "../../store/slices/authenticationSlice";
+import { setLoginResponse, setSlidingIndicator } from "../../store/slices/authenticationSlice";
 
 interface OnboardingProps {
   api: APIService;
@@ -17,32 +16,28 @@ const Onboarding = (props: OnboardingProps) => {
   const disptach = useDispatch();
   const navigate = useNavigate();
 
-  const [loginResponse, setloginResponse] = useState<LoginResponse | null>(
-    null
-  );
-  const isLoggedUser = useSelector(
-    (state: RootState) => state.auth.loggedUser !== null
+  const {loggedUser, seenOnboardingSlides} = useSelector(
+    (state: RootState) => state.auth
   );
   const handleSuccessfullLogin = (loginResponse: LoginResponse) => {
-    setloginResponse(loginResponse);
-    // disptach(setLoginResponse({ loginResponse: loginResponse }));
+    disptach(setLoginResponse({ loginResponse: loginResponse }));
   };
 
   const handleFinishedOnboardingSlides = () => {
-    if (loginResponse === null) {
-      throw Error("Cannot dispatch login response which is null");
+    if (loggedUser === null) {
+      throw Error("Cannot dispatch finish slides without login first");
     }
-    disptach(setLoginResponse({ loginResponse: loginResponse }));
+    disptach(setSlidingIndicator());
     navigate("/main");
   };
 
-  if (isLoggedUser) {
+  if (loggedUser !== null && seenOnboardingSlides) {
     return <Navigate replace to={{ pathname: "/main" }} />;
   }
 
   return (
-    <div className={`Onboarding ${loginResponse ? "centered" : ""}`}>
-      {loginResponse ? (
+    <div className={`Onboarding ${loggedUser ? "centered" : ""}`}>
+      {loggedUser !== null && !seenOnboardingSlides   ? (
         <OnboardingSlides onLastSlidingClick={handleFinishedOnboardingSlides} />
       ) : (
         <LoginPage
