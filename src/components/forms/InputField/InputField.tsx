@@ -1,7 +1,6 @@
 import {
   forwardRef,
   InputHTMLAttributes,
-  Ref,
   useEffect,
   useImperativeHandle,
   useRef,

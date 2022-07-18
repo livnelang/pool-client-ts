@@ -1,15 +1,29 @@
-import { ReactElement } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./MenuItem.scss";
 
 export interface MenuItemProps {
   text: string;
   icon: JSX.Element;
+  path: string;
+}
+
+export interface ExtendedMenuItemProps extends MenuItemProps{
   isActive: boolean;
 }
 
-const MenuItem = (props: MenuItemProps) => {
+const MenuItem = (props: ExtendedMenuItemProps) => {
+  const navigate = useNavigate();
+
+  const handleClickMenuItem = (path: string) => {
+    navigate(path);
+  };
+
   return (
-    <div className={`MenuItem ${props.isActive ? "active" : ""}`}>
+    <div
+      className={`MenuItem ${props.isActive ? "active" : ""}`}
+      onClick={() => handleClickMenuItem(props.path)}
+    >
       {props.icon}
       <span className="text">{props.text}</span>
     </div>

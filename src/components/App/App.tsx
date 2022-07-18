@@ -19,7 +19,7 @@ const App = () => {
             <Route path="/" element={<Onboarding api={api} />}></Route>
             <Route path="/screens" element={<AllScreens />}></Route>
             <Route element={<ProtectedRoute />}>
-              <Route path="/main" element={<Main api={new APIService()} />} />
+              <Route path="/main/*" element={<Main api={new APIService()} />} />
             </Route>
           </Routes>
         </PersistGate>
