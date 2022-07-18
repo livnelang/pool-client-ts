@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./MenuItem.scss";
 
@@ -16,6 +15,9 @@ const MenuItem = (props: ExtendedMenuItemProps) => {
   const navigate = useNavigate();
 
   const handleClickMenuItem = (path: string) => {
+    if(path === "main") {
+      return navigate("/");
+    }
     navigate(path);
   };
 

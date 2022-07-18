@@ -8,6 +8,8 @@ import Onboarding from "../../views/Onboarding/Onboarding";
 import APIService from "../../helpers/api/API";
 import Main from "../Main/Main";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import AddCustomer from "../../views/AddCustomer/AddCustomer";
+import Home from "../../views/Home/Home";
 
 const App = () => {
   const api = new APIService();
@@ -19,7 +21,10 @@ const App = () => {
             <Route path="/" element={<Onboarding api={api} />}></Route>
             <Route path="/screens" element={<AllScreens />}></Route>
             <Route element={<ProtectedRoute />}>
-              <Route path="/main/*" element={<Main api={new APIService()} />} />
+              <Route path="/main/" element={<Main api={api} />}>
+                <Route index element={<Home />} />
+                <Route path="/main/addCustomer" element={<AddCustomer />} />
+              </Route>
             </Route>
           </Routes>
         </PersistGate>
