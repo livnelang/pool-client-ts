@@ -47,7 +47,7 @@ const componentsPreview: ComponentPreview[] = [
   },
   {
     name: "Menu Item",
-    element: <MenuItem text="בית" isActive={false} icon={<AiOutlineHome />} />,
+    element: <MenuItem text="בית" isActive={false} path="" icon={<AiOutlineHome />} />,
   },
   {
     name: "Active Menu Item",
@@ -55,7 +55,9 @@ const componentsPreview: ComponentPreview[] = [
       <MenuItem
         text="בית"
         isActive={true}
-        icon={<AiOutlineHome color={`${1 ? "#3BC5CE" : ""}`} />}
+        path=""
+        // eslint-disable-next-line no-constant-condition
+        icon={<AiOutlineHome color={`${true ? "#3BC5CE" : ""}`} />}
       />
     ),
   },
@@ -64,25 +66,28 @@ const componentsPreview: ComponentPreview[] = [
     element: (
       <Menu
         items={[
-          { text: "בית", icon: <AiOutlineHome />, isActive: true },
-          { text: "הוסף לקוח", icon: <AiOutlineUserAdd />, isActive: false },
-          { text: "הוסף הזמנה", icon: <AiOutlineBarcode />, isActive: false },
-          { text: "הזמנות", icon: <AiOutlineCalendar />, isActive: false },
+          { text: "בית", icon: <AiOutlineHome />, path:"" },
+          { text: "הוסף לקוח", icon: <AiOutlineUserAdd />, path:"" },
+          { text: "הוסף הזמנה", icon: <AiOutlineBarcode />, path:"" },
+          { text: "הזמנות", icon: <AiOutlineCalendar />, path:""},
         ]}
       />
     ),
   },
   {
     name: "App Modal",
-    element: <AppModal
-      isOpen={true}
-      onCloseModal={() => { }}
-      text={"נושא מסוים"}
-      secondaryText="מאחורי היער אחת שתיים שלוש" />,
+    element: (
+      <AppModal
+        isOpen={true}
+        onCloseModal={() => {}}
+        text={"נושא מסוים"}
+        secondaryText="מאחורי היער אחת שתיים שלוש"
+      />
+    ),
   },
   {
     name: "Profile Bar",
-    element: <ProfileBar userName="ארצי בנקר"/>,
+    element: <ProfileBar userName="ארצי בנקר" />,
   },
 ];
 
