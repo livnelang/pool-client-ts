@@ -8,7 +8,6 @@ import { LoggedUser } from "../../interfaces/Authentication";
 import { store } from "../../store/rtkStore";
 import {
   removeLoggedUser,
-  setLoginResponse,
 } from "../../store/slices/authenticationSlice";
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
@@ -20,12 +19,10 @@ const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
     config.headers["x-access-token"] = loggedUser.token;
   }
 
-  console.info(`[request] [${JSON.stringify(config)}]`);
   return config;
 };
 
 const onResponse = (response: AxiosResponse): AxiosResponse => {
-  console.info(`[response] [${JSON.stringify(response)}]`);
   return response;
 };
 

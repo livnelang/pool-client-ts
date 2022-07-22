@@ -11,7 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authSlice from "./slices/authenticationSlice";
-// import recipesSlice from "./slices/recipesSlice";
+import productsSlice from "./slices/productsSlice";
 
 const persistConfig = {
   key: "auth",
@@ -20,7 +20,7 @@ const persistConfig = {
 };
 
 const allMySliceReducersReducer = combineReducers({
-  // recipes: recipesSlice.reducer,
+  products: productsSlice.reducer,
   auth: authSlice.reducer,
 });
 

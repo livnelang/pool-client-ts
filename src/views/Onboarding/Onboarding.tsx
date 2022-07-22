@@ -6,7 +6,10 @@ import APIService from "../../helpers/api/API";
 import LoginPage from "./components/LoginPage/LoginPage";
 import OnboardingSlides from "./components/OnboardingSlides/OnboardingSlides";
 import { LoginResponse } from "../../interfaces/Authentication";
-import { setLoginResponse, setSlidingIndicator } from "../../store/slices/authenticationSlice";
+import {
+  setLoginResponse,
+  setSlidingIndicator,
+} from "../../store/slices/authenticationSlice";
 
 interface OnboardingProps {
   api: APIService;
@@ -16,7 +19,7 @@ const Onboarding = (props: OnboardingProps) => {
   const disptach = useDispatch();
   const navigate = useNavigate();
 
-  const {loggedUser, seenOnboardingSlides} = useSelector(
+  const { loggedUser, seenOnboardingSlides } = useSelector(
     (state: RootState) => state.auth
   );
   const handleSuccessfullLogin = (loginResponse: LoginResponse) => {
@@ -37,7 +40,7 @@ const Onboarding = (props: OnboardingProps) => {
 
   return (
     <div className={`Onboarding ${loggedUser ? "centered" : ""}`}>
-      {loggedUser !== null && !seenOnboardingSlides   ? (
+      {loggedUser !== null && !seenOnboardingSlides ? (
         <OnboardingSlides onLastSlidingClick={handleFinishedOnboardingSlides} />
       ) : (
         <LoginPage

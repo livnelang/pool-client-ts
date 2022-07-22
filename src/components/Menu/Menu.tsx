@@ -1,3 +1,4 @@
+import React from "react";
 import { useLocation } from "react-router-dom";
 import MenuItem, { MenuItemProps } from "../MenuItem/MenuItem";
 import "./Menu.scss";
@@ -11,10 +12,9 @@ const Menu = (props: MenuProps) => {
   const currentPathName = location.pathname.substring(
     location.pathname.lastIndexOf("/") + 1
   );
-  console.log(currentPathName);
 
-  const isEqualPathName = (path: string) => {
-    return path === currentPathName;
+  const isEqualPathName = (path: string): boolean => {
+    return (path === "main" && currentPathName === "") ? true :  path === currentPathName;
   };
 
   return (
@@ -32,4 +32,4 @@ const Menu = (props: MenuProps) => {
   );
 };
 
-export default Menu;
+export default React.memo(Menu);

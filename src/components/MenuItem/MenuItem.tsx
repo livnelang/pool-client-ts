@@ -16,7 +16,7 @@ const MenuItem = (props: ExtendedMenuItemProps) => {
 
   const handleClickMenuItem = (path: string) => {
     if(path === "main") {
-      return navigate("/");
+      return navigate("./");
     }
     navigate(path);
   };

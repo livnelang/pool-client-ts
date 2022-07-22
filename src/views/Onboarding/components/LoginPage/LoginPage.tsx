@@ -1,12 +1,10 @@
 import "./LoginPage.scss";
 import OnboardingImg from "../../../../assets/images/onboarding_top_image.svg";
-import { useDispatch } from "react-redux";
 import APIService from "../../../../helpers/api/API";
 import { useRef, useState } from "react";
 import AppButton from "../../../../components/AppButton/AppButton";
 import InputField from "../../../../components/forms/InputField/InputField";
 import MotionPage from "../../../../components/MotionPage/MotionPage";
-import { setLoginResponse } from "../../../../store/slices/authenticationSlice";
 import useLoginPageHook from "./hooks/useLoginPageHook";
 import { CgSpinner } from "react-icons/cg";
 import { LoginResponse } from "../../../../interfaces/Authentication";
@@ -50,11 +48,9 @@ const LoginPage = (props: LoginPageProps) => {
     setisLoading(true);
     login(loginDetails.fields)
       .then((res) => {
-        console.log(res);
         props.onSuccessFullLogin(res);
-        // disptach(setLoginResponse({ loginResponse: res }));
       })
-      .catch((err) => setshowFailedLoginModal(true))
+      .catch(() => setshowFailedLoginModal(true))
       .finally(() => setisLoading(false));
   };
 

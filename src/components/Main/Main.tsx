@@ -11,31 +11,46 @@ import Menu from "../Menu/Menu";
 import APIService from "../../helpers/api/API";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import { RootState } from "../../store/rtkStore";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setProductsResponse } from "../../store/slices/productsSlice";
+import { ProductsResponse } from "../../interfaces/Products";
 
 interface MainProps {
   api: APIService;
 }
 
-// eslint-disable-next-line no-unused-vars
 function Main(props: MainProps) {
   const loggedUser = useSelector((state: RootState) => state.auth.loggedUser);
+  const [isLoadingInitialData, setisLoadingInitialData] =
+    useState<boolean>(false);
+  const dispatch = useDispatch();
+  const products = useSelector((state: RootState) => state.products.products);
 
   if (loggedUser === null) {
     throw Error("Cannot initiate main screen without being logged in");
   }
 
-  // useEffect(() => {
-  //   const getAllClients = async () => {
-  //     const allClients = await props.api.getAllClients();
-  //     console.log("allClinets res: ", allClients);
-  //   };
-  //   getAllClients();
-  // }, []);
+  useEffect(() => {
+    if (products !== null) {
+      return;
+    }
+    setisLoadingInitialData(true);
+    props.api
+      .getAllProducts()
+      .then((res: ProductsResponse) => {
+        dispatch(setProductsResponse({ productsResponse: res }));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setisLoadingInitialData(false));
+  }, []);
 
   return (
     <div className="Main">
       <ProfileBar userName={loggedUser.userName} />
-      <Outlet />
+      {isLoadingInitialData ? null : <Outlet />}
       <Menu
         items={[
           { text: "בית", icon: <AiOutlineHome />, path: "main" },
@@ -44,8 +59,8 @@ function Main(props: MainProps) {
             icon: <AiOutlineUserAdd />,
             path: "addCustomer",
           },
-          { text: "הוסף הזמנה", icon: <AiOutlineBarcode />, path: "" },
-          { text: "הזמנות", icon: <AiOutlineCalendar />, path: "" },
+          { text: "הוסף הזמנה", icon: <AiOutlineBarcode />, path: "addOrder" },
+          { text: "הזמנות", icon: <AiOutlineCalendar />, path: "orders" },
         ]}
       />
     </div>
