@@ -56,7 +56,7 @@ const componentsPreview: ComponentPreview[] = [
         text="בית"
         isActive={true}
         path=""
-        // eslint-disable-next-line no-constant-condition
+        // eslint-disable-next-line no-constant-condition 
         icon={<AiOutlineHome color={`${true ? "#3BC5CE" : ""}`} />}
       />
     ),
