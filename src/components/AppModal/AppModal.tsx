@@ -15,13 +15,16 @@ import {
 
 type AppModalType = "success" | "fail" | "info";
 
-interface AppModalProps {
-  isOpen: boolean;
-  onCloseModal: () => void;
+export interface BaseModalProps {
   text: string;
   secondaryText?: string;
   confirmButtonText?: string;
   type?: AppModalType;
+}
+
+interface AppModalProps extends BaseModalProps {
+  isOpen: boolean;
+  onCloseModal: () => void;
 }
 
 const DEFAULT_CONFIRM_TEXT = "סגירה";

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { LoginRequest, LoginResponse } from "../../interfaces/Authentication";
+import { NewCustomerRequest } from "../../interfaces/Customer";
 import { setupInterceptorsTo } from "./interceptors";
 
 // const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -22,6 +23,10 @@ class APIService {
 
   public async login(body: LoginRequest): Promise<LoginResponse> {
     return axios.post(BASE_URL + "authenticate", body).then((res) => res.data);
+  }
+
+  public async addCustomer(body: NewCustomerRequest): Promise<any> {
+    return axios.post(BASE_URL + "addClient", body).then((res) => res.data);
   }
 
   //   public async createRecipe(body: RecipeCreateParams): Promise<Recipe> {

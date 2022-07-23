@@ -47,7 +47,9 @@ const componentsPreview: ComponentPreview[] = [
   },
   {
     name: "Menu Item",
-    element: <MenuItem text="בית" isActive={false} path="" icon={<AiOutlineHome />} />,
+    element: (
+      <MenuItem text="בית" isActive={false} path="" icon={<AiOutlineHome />} />
+    ),
   },
   {
     name: "Active Menu Item",
@@ -56,7 +58,7 @@ const componentsPreview: ComponentPreview[] = [
         text="בית"
         isActive={true}
         path=""
-        // eslint-disable-next-line no-constant-condition 
+        // eslint-disable-next-line no-constant-condition
         icon={<AiOutlineHome color={`${true ? "#3BC5CE" : ""}`} />}
       />
     ),
@@ -66,10 +68,10 @@ const componentsPreview: ComponentPreview[] = [
     element: (
       <Menu
         items={[
-          { text: "בית", icon: <AiOutlineHome />, path:"" },
-          { text: "הוסף לקוח", icon: <AiOutlineUserAdd />, path:"" },
-          { text: "הוסף הזמנה", icon: <AiOutlineBarcode />, path:"" },
-          { text: "הזמנות", icon: <AiOutlineCalendar />, path:""},
+          { text: "בית", icon: <AiOutlineHome />, path: "" },
+          { text: "הוסף לקוח", icon: <AiOutlineUserAdd />, path: "" },
+          { text: "הוסף הזמנה", icon: <AiOutlineBarcode />, path: "" },
+          { text: "הזמנות", icon: <AiOutlineCalendar />, path: "" },
         ]}
       />
     ),
@@ -88,7 +90,7 @@ const componentsPreview: ComponentPreview[] = [
   {
     name: "Profile Bar",
     element: <ProfileBar userName="ארצי בנקר" />,
-  },
+  }
 ];
 
 const AllScreens = () => {

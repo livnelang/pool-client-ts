@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormFields, LoginForm } from "../LoginPage";
+import { LoginFormFields, LoginForm } from "../LoginPage";
 
 const initialLoginForm: LoginForm = {
   fields: {
@@ -24,25 +24,25 @@ const useLoginPageHook = () => {
         });
         return false;
       }
-      switch (fieldKey as keyof FormFields) {
-        case "email": {
-          if (fieldValue) {
-          }
+      // switch (fieldKey as keyof LoginFormFields) {
+      //   case "email": {
+      //     if (fieldValue) {
+      //     }
 
-          break;
-        }
+      //     break;
+      //   }
 
-        case "password": {
-          break;
-        }
-      }
+      //   case "password": {
+      //     break;
+      //   }
+      // }
     }
     return true;
   };
 
-  const handleLoginFormFieldChange = <P extends keyof FormFields>(
+  const handleLoginFormFieldChange = <P extends keyof LoginFormFields>(
     key: P,
-    value: FormFields[P]
+    value: LoginFormFields[P]
   ) => {
     setloginDetails({
       errors: loginDetails.errors,

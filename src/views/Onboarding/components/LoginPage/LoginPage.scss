@@ -24,22 +24,4 @@
             margin-top: 8px;
         }
     }
-
-    .formContainer {
-        width: 100%;
-        margin-top: 24px;
-    }
-
-    .loginForm > * + * {
-        margin-top: 8px;
-    }
-
-    .AppButton {
-        margin-top: 16px;
-        direction: rtl;
-
-        .spinner {
-            margin-right: 8px;
-        }
-    }
 }

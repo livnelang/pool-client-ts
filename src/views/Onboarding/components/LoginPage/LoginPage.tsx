@@ -9,15 +9,17 @@ import useLoginPageHook from "./hooks/useLoginPageHook";
 import { CgSpinner } from "react-icons/cg";
 import { LoginResponse } from "../../../../interfaces/Authentication";
 import AppModal from "../../../../components/AppModal/AppModal";
+import FormContainer from "../../../../components/forms/FormContainer/FormContainer";
+import useModal from "../../../../hooks/useModal";
 
-export interface FormFields {
+export interface LoginFormFields {
   email: string;
   password: string;
 }
 
 export interface LoginForm {
-  fields: FormFields;
-  errors: { [key in keyof FormFields]: boolean };
+  fields: LoginFormFields;
+  errors: { [key in keyof LoginFormFields]: boolean };
 }
 
 export interface LoginPageProps {
@@ -29,8 +31,7 @@ const LoginPage = (props: LoginPageProps) => {
   const { loginDetails, handleLoginFormFieldChange, validateLoginForm } =
     useLoginPageHook();
   const [isLoading, setisLoading] = useState<boolean>(false);
-  const [showFailedLoginModal, setshowFailedLoginModal] =
-    useState<boolean>(false);
+  const { isModalOpen, setIsModalOpen } = useModal();
   const { login } = props.api;
   const mailInputRef = useRef<any>(null);
 
@@ -50,7 +51,7 @@ const LoginPage = (props: LoginPageProps) => {
       .then((res) => {
         props.onSuccessFullLogin(res);
       })
-      .catch(() => setshowFailedLoginModal(true))
+      .catch(() => setIsModalOpen(true))
       .finally(() => setisLoading(false));
   };
 
@@ -67,12 +68,13 @@ const LoginPage = (props: LoginPageProps) => {
           </p>
         </div>
 
-        <div className="formContainer">
-          <form className="loginForm" onSubmit={handleClickSubmitForm}>
+        <FormContainer>
+          <form onSubmit={handleClickSubmitForm}>
             <InputField
               ref={mailInputRef}
               label="מייל"
               type="email"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               onChange={(e) =>
                 handleLoginFormFieldChange("email", e.target.value)
               }
@@ -81,7 +83,6 @@ const LoginPage = (props: LoginPageProps) => {
             <InputField
               label="סיסמא"
               type="password"
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               onChange={(e) =>
                 handleLoginFormFieldChange("password", e.target.value)
               }
@@ -97,11 +98,11 @@ const LoginPage = (props: LoginPageProps) => {
           >
             {isLoading ? <CgSpinner className="spinner" /> : null}
           </AppButton>
-        </div>
+        </FormContainer>
       </div>
       <AppModal
-        isOpen={showFailedLoginModal}
-        onCloseModal={() => setshowFailedLoginModal(false)}
+        isOpen={isModalOpen}
+        onCloseModal={() => setIsModalOpen(false)}
         text="שגיאה"
         secondaryText="פרטי התחברות אינם נכונים"
         confirmButtonText="אישור"

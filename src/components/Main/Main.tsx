@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setProductsResponse } from "../../store/slices/productsSlice";
 import { ProductsResponse } from "../../interfaces/Products";
+import PageLayout from "../PageLayout/PageLayout";
 
 interface MainProps {
   api: APIService;
@@ -50,7 +51,11 @@ function Main(props: MainProps) {
   return (
     <div className="Main">
       <ProfileBar userName={loggedUser.userName} />
-      {isLoadingInitialData ? null : <Outlet />}
+      {isLoadingInitialData ? null : (
+        <PageLayout>
+          <Outlet />
+        </PageLayout>
+      )}
       <Menu
         items={[
           { text: "בית", icon: <AiOutlineHome />, path: "main" },

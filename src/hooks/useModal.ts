@@ -1,13 +1,9 @@
 import { useState } from "react";
 
 const useModal = () => {
-    const [isModalOpen, setisModalOpen] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    const toggleIsModalOpen = () => {
-        setisModalOpen(!isModalOpen);
-    };
-
-    return {isModalOpen, toggleIsModalOpen};
+    return {isModalOpen, setIsModalOpen};
 };
 
 export default useModal;
