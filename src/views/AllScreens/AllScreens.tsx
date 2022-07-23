@@ -90,7 +90,7 @@ const componentsPreview: ComponentPreview[] = [
   {
     name: "Profile Bar",
     element: <ProfileBar userName="ארצי בנקר" />,
-  }
+  },
 ];
 
 const AllScreens = () => {

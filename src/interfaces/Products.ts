@@ -5,5 +5,5 @@ export interface Product {
 }
 
 export interface ProductsResponse {
-    products: Product[];
+  products: Product[];
 }

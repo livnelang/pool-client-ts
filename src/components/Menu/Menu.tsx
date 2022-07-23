@@ -14,7 +14,9 @@ const Menu = (props: MenuProps) => {
   );
 
   const isEqualPathName = (path: string): boolean => {
-    return (path === "main" && currentPathName === "") ? true :  path === currentPathName;
+    return path === "main" && currentPathName === ""
+      ? true
+      : path === currentPathName;
   };
 
   return (

@@ -7,7 +7,7 @@ export interface MenuItemProps {
   path: string;
 }
 
-export interface ExtendedMenuItemProps extends MenuItemProps{
+export interface ExtendedMenuItemProps extends MenuItemProps {
   isActive: boolean;
 }
 
@@ -15,7 +15,7 @@ const MenuItem = (props: ExtendedMenuItemProps) => {
   const navigate = useNavigate();
 
   const handleClickMenuItem = (path: string) => {
-    if(path === "main") {
+    if (path === "main") {
       return navigate("./");
     }
     navigate(path);

@@ -6,7 +6,7 @@ export interface ProductsState {
 }
 
 const productsInitialState: ProductsState = {
-  products: null
+  products: null,
 };
 
 const productsSlice = createSlice({
@@ -18,14 +18,13 @@ const productsSlice = createSlice({
       { payload }: PayloadAction<{ productsResponse: ProductsResponse }>
     ) => {
       state.products = payload.productsResponse.products;
-    }
+    },
   },
 });
 
 // ACTIONS
-export const { 
-  setProductsResponse: setProductsResponse
-} = productsSlice.actions;
+export const { setProductsResponse: setProductsResponse } =
+  productsSlice.actions;
 
 // REDUCER
 export default productsSlice;

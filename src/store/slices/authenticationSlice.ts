@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppMails, LoggedUser, LoginResponse } from "../../interfaces/Authentication";
+import {
+  AppMails,
+  LoggedUser,
+  LoginResponse,
+} from "../../interfaces/Authentication";
 
 export interface AuthenticationState {
   loggedUser: LoggedUser | null;
@@ -10,7 +14,7 @@ export interface AuthenticationState {
 const authenticationInitialState: AuthenticationState = {
   loggedUser: null,
   mails: null,
-  seenOnboardingSlides: false
+  seenOnboardingSlides: false,
 };
 
 // SLICES
@@ -25,25 +29,21 @@ const authSlice = createSlice({
       state.loggedUser = payload.loginResponse.loggedUser;
       state.mails = payload.loginResponse.mails;
     },
-    setSlidingIndicator: (
-      state,
-    ) => {
-      state.seenOnboardingSlides = !state.seenOnboardingSlides
+    setSlidingIndicator: (state) => {
+      state.seenOnboardingSlides = !state.seenOnboardingSlides;
     },
-    removeLoggedUser: (
-      state,
-    ) => {
+    removeLoggedUser: (state) => {
       state.loggedUser = null;
-      state.mails = null
+      state.mails = null;
     },
   },
 });
 
 // ACTIONS
-export const { 
-  setLoginResponse: setLoginResponse, 
+export const {
+  setLoginResponse: setLoginResponse,
   removeLoggedUser: removeLoggedUser,
-  setSlidingIndicator: setSlidingIndicator
+  setSlidingIndicator: setSlidingIndicator,
 } = authSlice.actions;
 
 // REDUCER

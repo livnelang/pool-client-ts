@@ -23,7 +23,10 @@ const App = () => {
             <Route element={<ProtectedRoute />}>
               <Route path="/main/" element={<Main api={api} />}>
                 <Route index element={<Home />} />
-                <Route path="/main/addCustomer" element={<AddCustomer api={api} />} />
+                <Route
+                  path="/main/addCustomer"
+                  element={<AddCustomer api={api} />}
+                />
               </Route>
             </Route>
           </Routes>

@@ -4,16 +4,20 @@ import { AddCustomerForm, AddCustomerFormFields } from "../AddCustomer";
 const initialAddCustomerForm: AddCustomerForm = {
   fields: {
     firstName: "",
-    lastName: ""
+    lastName: "",
   },
   errors: { firstName: false, lastName: false },
 };
 
 const useAddCustomerFormHook = () => {
-  const [addCustomerForm, setAddCustomerForm] = useState<AddCustomerForm>(initialAddCustomerForm);
+  const [addCustomerForm, setAddCustomerForm] = useState<AddCustomerForm>(
+    initialAddCustomerForm
+  );
 
   const validateForm = (): boolean => {
-    for (const [fieldKey, fieldValue] of Object.entries(addCustomerForm.fields)) {
+    for (const [fieldKey, fieldValue] of Object.entries(
+      addCustomerForm.fields
+    )) {
       if (fieldValue === "") {
         setAddCustomerForm({
           ...addCustomerForm,
@@ -24,18 +28,6 @@ const useAddCustomerFormHook = () => {
         });
         return false;
       }
-      // switch (fieldKey as keyof AddCustomerFormFields) {
-      //   case "email": {
-      //     if (fieldValue) {
-      //     }
-
-      //     break;
-      //   }
-
-      //   case "password": {
-      //     break;
-      //   }
-      // }
     }
     return true;
   };
@@ -53,7 +45,11 @@ const useAddCustomerFormHook = () => {
     });
   };
 
-  return { addCustomerForm, handleFormFieldChange: handleFormFieldChange, validateForm: validateForm };
+  return {
+    addCustomerForm,
+    handleFormFieldChange: handleFormFieldChange,
+    validateForm: validateForm,
+  };
 };
 
 export default useAddCustomerFormHook;
