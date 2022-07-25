@@ -13,6 +13,7 @@ import Menu from "../../components/Menu/Menu";
 import AppModal from "../../components/AppModal/AppModal";
 import ProfileBar from "../../components/ProfileBar/ProfileBar";
 import AppSelect from "../../components/forms/AppSelect/AppSelect";
+import AppButton from "../../components/AppButton/AppButton";
 
 interface ComponentPreview {
   name: string;
@@ -20,6 +21,14 @@ interface ComponentPreview {
 }
 
 const componentsPreview: ComponentPreview[] = [
+  {
+    name: "App Button",
+    element: <AppButton text="ברוך הבא" />,
+  },
+  {
+    name: "App Button Small",
+    element: <AppButton text="ברוך הבא" size="small" />,
+  },
   {
     name: "Text input Field",
     element: (

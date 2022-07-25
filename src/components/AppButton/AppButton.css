@@ -25,3 +25,13 @@
     border: 1px solid #D0DBEA;
     color: var(--main);
 }
+
+.AppButton.regular {
+    padding: 19px 32px;
+    border-radius: 32px;
+}
+
+.AppButton.small {
+    padding: 8px 16px;
+    border-radius: 8px;
+}

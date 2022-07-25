@@ -16,6 +16,9 @@ import FormContainer from "../../components/forms/FormContainer/FormContainer";
 import AppSelect, {
   AppSelectOption,
 } from "../../components/forms/AppSelect/AppSelect";
+import OrdersTable from "./components/OrdersTable/OrdersTable";
+import { Order } from "../../interfaces/Order";
+import AppButton from "../../components/AppButton/AppButton";
 
 const monthsOptions: AppSelectOption[] = months.map((m) => {
   return {
@@ -44,6 +47,29 @@ interface CustomerOption {
   label: string;
   value: string;
 }
+
+const rows: Order[] = [
+  {
+    date: "2022-07-01T07:32:00.000Z",
+    firstName: "רון",
+    lastName: "וולקון",
+    pricePerProduct: 4,
+    productName: "קרטיב",
+    quantity: 1,
+    total: 4,
+    _id: "62bea331b486d50004593afd",
+  },
+  {
+    date: "2022-07-01T07:32:00.000Z",
+    firstName: "רון",
+    lastName: "וולקון",
+    pricePerProduct: 4,
+    productName: "קרטיב",
+    quantity: 1,
+    total: 4,
+    _id: "62bea331b486d50004593afd",
+  },
+];
 
 const Orders = (props: Props) => {
   const { api } = props;
@@ -121,7 +147,7 @@ const Orders = (props: Props) => {
             label="בחר לקוח"
             defaultOption={formState.selectedCustomer ?? undefined}
             onValueChange={(newValue) => {
-              handleFormStateFieldChange("currentMonthOption", newValue);
+              handleFormStateFieldChange("selectedCustomer", newValue);
             }}
             options={customersOptions}
           />
@@ -133,6 +159,10 @@ const Orders = (props: Props) => {
             }}
             options={monthsOptions}
           />
+
+          <AppButton size="small" text="הצג" onClick={() => {}} />
+          <AppButton size="small" text="שלח במייל" onClick={() => {}} />
+          <OrdersTable rows={rows} />
         </form>
       </FormContainer>
 
