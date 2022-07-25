@@ -12,6 +12,7 @@ import {
 import Menu from "../../components/Menu/Menu";
 import AppModal from "../../components/AppModal/AppModal";
 import ProfileBar from "../../components/ProfileBar/ProfileBar";
+import AppSelect from "../../components/forms/AppSelect/AppSelect";
 
 interface ComponentPreview {
   name: string;
@@ -90,6 +91,20 @@ const componentsPreview: ComponentPreview[] = [
   {
     name: "Profile Bar",
     element: <ProfileBar userName="ארצי בנקר" />,
+  },
+  {
+    name: "App Select",
+    element: (
+      <AppSelect
+        label="בחר רכב"
+        defaultOption={{ label: "Volvo", value: "Volvo" }}
+        onValueChange={() => {}}
+        options={[
+          { label: "Volvo", value: "Volvo" },
+          { label: "BMW", value: "BMW" },
+        ]}
+      />
+    ),
   },
 ];
 

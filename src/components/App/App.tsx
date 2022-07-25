@@ -10,6 +10,7 @@ import Main from "../Main/Main";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import AddCustomer from "../../views/AddCustomer/AddCustomer";
 import Home from "../../views/Home/Home";
+import Orders from "../../views/Orders/Orders";
 
 const App = () => {
   const api = new APIService();
@@ -27,6 +28,7 @@ const App = () => {
                   path="/main/addCustomer"
                   element={<AddCustomer api={api} />}
                 />
+                <Route path="/main/orders" element={<Orders api={api} />} />
               </Route>
             </Route>
           </Routes>

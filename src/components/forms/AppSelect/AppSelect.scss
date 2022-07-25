@@ -1,0 +1,10 @@
+.AppSelect {
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+}

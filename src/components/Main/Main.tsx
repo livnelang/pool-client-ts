@@ -14,7 +14,7 @@ import { RootState } from "../../store/rtkStore";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setProductsResponse } from "../../store/slices/productsSlice";
-import { ProductsResponse } from "../../interfaces/Products";
+import { ProductsResponse } from "../../interfaces/Product";
 import PageLayout from "../PageLayout/PageLayout";
 
 interface MainProps {
