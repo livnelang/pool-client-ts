@@ -2,7 +2,7 @@ import "./ProfileBar.scss";
 import ProfileBarImg from "../../assets/images/profile_bar.svg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useDispatch } from "react-redux";
-import { removeLoggedUser } from "../../store/slices/authenticationSlice";
+import { removeLoggedUser, setSlidingIndicator } from "../../store/slices/authenticationSlice";
 import { useNavigate } from "react-router-dom";
 
 interface ProfileBarProps {
@@ -15,6 +15,7 @@ const ProfileBar = (props: ProfileBarProps) => {
 
   const handleClickLogOut = () => {
     dispatch(removeLoggedUser());
+    dispatch(setSlidingIndicator());
     navigate("/");
   };
 

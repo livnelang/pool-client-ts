@@ -16,21 +16,21 @@ interface OnboardingProps {
 }
 
 const Onboarding = (props: OnboardingProps) => {
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { loggedUser, seenOnboardingSlides } = useSelector(
     (state: RootState) => state.auth
   );
   const handleSuccessfullLogin = (loginResponse: LoginResponse) => {
-    disptach(setLoginResponse({ loginResponse: loginResponse }));
+    dispatch(setLoginResponse({ loginResponse: loginResponse }));
   };
 
   const handleFinishedOnboardingSlides = () => {
     if (loggedUser === null) {
       throw Error("Cannot dispatch finish slides without login first");
     }
-    disptach(setSlidingIndicator());
+    dispatch(setSlidingIndicator());
     navigate("/main");
   };
 
