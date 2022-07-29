@@ -49,13 +49,15 @@ function Main(props: MainProps) {
   }, []);
 
   return (
-    <div className="Main">
-      <ProfileBar userName={loggedUser.userName} />
-      {isLoadingInitialData ? null : (
-        <PageLayout>
-          <Outlet />
-        </PageLayout>
-      )}
+    <>
+      <div className="Main">
+        <ProfileBar userName={loggedUser.userName} />
+        {isLoadingInitialData ? null : (
+          <PageLayout>
+            <Outlet />
+          </PageLayout>
+        )}
+      </div>
       <Menu
         items={[
           { text: "בית", icon: <AiOutlineHome />, path: "main" },
@@ -68,7 +70,7 @@ function Main(props: MainProps) {
           { text: "הזמנות", icon: <AiOutlineCalendar />, path: "orders" },
         ]}
       />
-    </div>
+    </>
   );
 }
 
