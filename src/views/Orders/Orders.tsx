@@ -17,8 +17,10 @@ import AppSelect, {
   AppSelectOption,
 } from "../../components/forms/AppSelect/AppSelect";
 import OrdersTable from "./components/OrdersTable/OrdersTable";
-import { Order } from "../../interfaces/Order";
+import { Order, OrdersRequest } from "../../interfaces/Order";
 import AppButton from "../../components/AppButton/AppButton";
+import OrdersTotalAmount from "./components/OrdersTotalAmount/OrdersTotalAmount";
+import { LinearProgress } from "@mui/material";
 
 const monthsOptions: AppSelectOption[] = months.map((m) => {
   return {
@@ -31,12 +33,14 @@ interface FormState {
   selectedCustomer: AppSelectOption | null;
   currentMonth: Month;
   currentMonthOption: AppSelectOption;
+  isAllClients: boolean;
 }
 
 const initialFormState: FormState = {
   currentMonth: getCurrentMonth(),
   currentMonthOption: getCurrentMonthSelectOption(),
   selectedCustomer: null,
+  isAllClients: false,
 };
 
 interface Props {
@@ -48,76 +52,20 @@ interface CustomerOption {
   value: string;
 }
 
-const rows: Order[] = [
-  {
-    date: "2022-07-01T07:32:00.000Z",
-    firstName: "רון",
-    lastName: "וולקון",
-    pricePerProduct: 4,
-    productName: "קרטיב",
-    quantity: 1,
-    total: 4,
-    _id: "62bea331b486d50004593afd",
-  },
-  {
-    date: "2022-07-01T07:32:00.000Z",
-    firstName: "רון",
-    lastName: "וולקון",
-    pricePerProduct: 4,
-    productName: "קרטיב",
-    quantity: 1,
-    total: 4,
-    _id: "62bea331b486d50004593afd",
-  },
-  {
-    date: "2022-07-01T07:32:00.000Z",
-    firstName: "רון",
-    lastName: "וולקון",
-    pricePerProduct: 4,
-    productName: "קרטיב",
-    quantity: 1,
-    total: 4,
-    _id: "62bea331b486d50004593afd",
-  },
-  {
-    date: "2022-07-01T07:32:00.000Z",
-    firstName: "רון",
-    lastName: "וולקון",
-    pricePerProduct: 4,
-    productName: "קרטיב",
-    quantity: 1,
-    total: 4,
-    _id: "62bea331b486d50004593afd",
-  },
-  {
-    date: "2022-07-01T07:32:00.000Z",
-    firstName: "רון",
-    lastName: "וולקון",
-    pricePerProduct: 4,
-    productName: "קרטיב",
-    quantity: 1,
-    total: 4,
-    _id: "62bea331b486d50004593afd",
-  },
-  {
-    date: "2022-07-01T07:32:00.000Z",
-    firstName: "רון",
-    lastName: "וולקון",
-    pricePerProduct: 4,
-    productName: "קרטיב",
-    quantity: 1,
-    total: 4,
-    _id: "62bea331b486d50004593afd",
-  },
-];
+interface OrdersDataExtended {
+  orders: Order[];
+  total: number;
+}
 
 const Orders = (props: Props) => {
   const { api } = props;
   const [isLoadingCustomers, setIsLoadingCustomers] = useState<boolean>(false);
+  const [isLoadingOrders, setIsLoadingOrders] = useState<boolean>(false);
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const [customersOptions, setCustomersOptions] = useState<CustomerOption[]>(
     []
   );
+  const [ordersData, setOrdersData] = useState<OrdersDataExtended | null>(null);
 
   const dispatch = useDispatch();
   const customers = useSelector(
@@ -137,7 +85,10 @@ const Orders = (props: Props) => {
     const mappedCustomers: AppSelectOption[] = customers.map((c) => {
       return {
         label: c.firstName + " " + c.lastName,
-        value: c.id,
+        value: {
+          firstName: c.firstName,
+          lastName: c.lastName,
+        },
       };
     });
     mappedCustomers.unshift(allCustomersOption);
@@ -146,8 +97,11 @@ const Orders = (props: Props) => {
     setFormState({
       ...formState,
       selectedCustomer: mappedCustomers[0],
+      isAllClients: mappedCustomers[0].label === "כל הלקוחות",
     });
   };
+
+  useEffect(() => {}, [formState.selectedCustomer]);
 
   useEffect(() => {
     if (customers !== null) {
@@ -170,7 +124,6 @@ const Orders = (props: Props) => {
     key: P,
     newValue: FormState[P]
   ) => {
-    console.log(newValue);
     setFormState({
       ...formState,
       [key]: newValue,
@@ -178,7 +131,37 @@ const Orders = (props: Props) => {
   };
 
   const handleClickShowOrders = () => {
+    if (formState.selectedCustomer === null) {
+      return;
+    }
 
+    const body: OrdersRequest = {
+      formObject: {
+        date: {
+          startDate: formState.currentMonth.range.startDate,
+          endDate: formState.currentMonth.range.endDate,
+        },
+        isAllClients: formState.isAllClients,
+        client: formState.selectedCustomer.value,
+      },
+    };
+
+    setIsLoadingOrders(true);
+    api
+      .getOrders(body)
+      .then((res) => {
+        const data: OrdersDataExtended = {
+          orders: res,
+          total: res.reduce((acc, o) => {
+            return (acc += o.total);
+          }, 0),
+        };
+        setOrdersData(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setIsLoadingOrders(false));
   };
 
   return (
@@ -191,7 +174,11 @@ const Orders = (props: Props) => {
             label="בחר לקוח"
             defaultOption={formState.selectedCustomer ?? undefined}
             onValueChange={(newValue) => {
-              handleFormStateFieldChange("selectedCustomer", newValue);
+              setFormState({
+                ...formState,
+                isAllClients: newValue.label === "כל הלקוחות",
+                selectedCustomer: newValue,
+              });
             }}
             options={customersOptions}
           />
@@ -204,25 +191,25 @@ const Orders = (props: Props) => {
             options={monthsOptions}
           />
 
-          <AppButton size="small" text="הצג" onClick={() => handleClickShowOrders()} />
+          <AppButton
+            size="small"
+            text="הצג"
+            onClick={() => handleClickShowOrders()}
+          />
           <AppButton size="small" text="שלח במייל" onClick={() => {}} />
-          <OrdersTable rows={rows} />
+          {isLoadingOrders ? (
+            <LinearProgress />
+          ) : ordersData === null ? null : (
+            <>
+              <OrdersTotalAmount
+                sum={ordersData.total}
+                isAllClients={formState.isAllClients}
+              />
+              {ordersData ? <OrdersTable rows={ordersData.orders} /> : null}
+            </>
+          )}
         </form>
       </FormContainer>
-
-      {/* {isLoadingCustomers ? (
-        <div>loading customers ..</div>
-      ) : customers !== null ? (
-        <div>
-          {customers.map((c, idx) => {
-            return (
-              <div key={idx}>
-                {c.firstName} {c.lastName}
-              </div>
-            );
-          })}
-        </div>
-      ) : null} */}
     </div>
   );
 };

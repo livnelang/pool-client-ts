@@ -1,12 +1,3 @@
-// date: "2022-07-01T07:32:00.000Z"
-// firstName: "רון"
-// lastName: "וולקון"
-// pricePerProduct: 4
-// productName: "קרטיב"
-// quantity: 1
-// total: 4
-// _id: "62bea331b486d50004593afd"
-
 export interface Order {
   _id: string;
   date: string;
@@ -16,4 +7,18 @@ export interface Order {
   productName: string;
   quantity: number;
   total: number;
+}
+
+export interface OrdersRequest {
+  formObject: {
+    date: {
+      startDate: Date;
+      endDate: Date;
+    };
+    client: {
+      firstName: string;
+      lastName: string;
+    };
+    isAllClients: boolean;
+  };
 }

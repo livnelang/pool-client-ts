@@ -22,13 +22,16 @@ const OrdersTable = ({ rows }: Props) => {
       day: "2-digit",
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit",
     }).format(new Date(row.date));
     return {
       ...row,
       date: formattedDate,
     };
   });
+
+  if (mappedRows.length === 0) {
+    return null;
+  }
   return (
     <TableContainer className="OrdersTable" component={Paper}>
       <Table sx={{ minWidth: 200 }} aria-label="simple table">
