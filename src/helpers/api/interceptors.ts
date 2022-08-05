@@ -6,7 +6,7 @@ import {
 } from "axios";
 import { LoggedUser } from "../../interfaces/Authentication";
 import { store } from "../../store/rtkStore";
-import { removeLoggedUser } from "../../store/slices/authenticationSlice";
+import { removeLoggedUser, setSlidingIndicator } from "../../store/slices/authenticationSlice";
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   const loggedUser: LoggedUser | null = store.getState().auth.loggedUser;
@@ -30,6 +30,7 @@ const onResponseError = (error: AxiosError): Promise<AxiosError> => {
 
   if (error.response?.status === 401 && !isAuthenticateUrl) {
     store.dispatch(removeLoggedUser());
+    store.dispatch(setSlidingIndicator());
     location.replace("/");
   }
 

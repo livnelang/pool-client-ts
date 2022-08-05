@@ -1,34 +1,35 @@
 import "./AppSelect.scss";
-import Select from "react-select";
 import { useEffect, useState } from "react";
+import Select from "react-select";
 
-export interface AppSelectOption {
+
+export interface AppSelectOption<T> {
   label: string;
-  value: any;
+  value: T;
 }
 
-interface Props {
+interface Props<T> {
   label: string;
-  onValueChange: (option: AppSelectOption) => void;
-  options: AppSelectOption[];
-  defaultOption?: AppSelectOption;
+  onValueChange: (option: AppSelectOption<T>) => void;
+  options: AppSelectOption<T>[];
+  defaultOption?: AppSelectOption<T>;
   placeholder?: string;
   isDisabled?: boolean;
 }
 
-const AppSelect = ({
+const AppSelect = <T extends object>({
   options,
   onValueChange,
   defaultOption,
   label,
   placeholder,
   isDisabled,
-}: Props) => {
-  const [selectedValue, setSelectedValue] = useState<AppSelectOption | null>(
+}: Props<T>) => {
+  const [selectedValue, setSelectedValue] = useState<AppSelectOption<T> | null>(
     null
   );
 
-  const handleValueChange = (newValue: any) => {
+  const handleValueChange = (newValue: AppSelectOption<T>) => {
     setSelectedValue(newValue);
     onValueChange(newValue);
   };
@@ -48,7 +49,7 @@ const AppSelect = ({
         className="react-select-class"
         options={options}
         value={selectedValue}
-        onChange={(newValue) => handleValueChange(newValue)}
+        onChange={(newValue) => handleValueChange(newValue as AppSelectOption<T>)}
       />
     </div>
   );

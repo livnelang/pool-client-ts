@@ -7,9 +7,8 @@ import { RootState } from "../../store/rtkStore";
 import { setCustomersResponse } from "../../store/slices/customersSlice";
 import "./Orders.scss";
 import {
-  getCurrentMonth,
   getCurrentMonthSelectOption,
-  Month,
+  MonthRange,
   months,
 } from "./utils/ordersUtils";
 import FormContainer from "../../components/forms/FormContainer/FormContainer";
@@ -22,7 +21,7 @@ import AppButton from "../../components/AppButton/AppButton";
 import OrdersTotalAmount from "./components/OrdersTotalAmount/OrdersTotalAmount";
 import { LinearProgress } from "@mui/material";
 
-const monthsOptions: AppSelectOption[] = months.map((m) => {
+const monthsOptions: AppSelectOption<MonthRange>[] = months.map((m) => {
   return {
     label: m.name,
     value: m.range,
@@ -30,16 +29,14 @@ const monthsOptions: AppSelectOption[] = months.map((m) => {
 });
 
 interface FormState {
-  selectedCustomer: AppSelectOption | null;
-  currentMonth: Month;
-  currentMonthOption: AppSelectOption;
+  selectedCustomerOption: AppSelectOption<CustomerName> | null;
+  selectedtMonthOption: AppSelectOption<MonthRange>;
   isAllClients: boolean;
 }
 
 const initialFormState: FormState = {
-  currentMonth: getCurrentMonth(),
-  currentMonthOption: getCurrentMonthSelectOption(),
-  selectedCustomer: null,
+  selectedtMonthOption: getCurrentMonthSelectOption(),
+  selectedCustomerOption: null,
   isAllClients: false,
 };
 
@@ -47,9 +44,9 @@ interface Props {
   api: APIService;
 }
 
-interface CustomerOption {
-  label: string;
-  value: string;
+interface CustomerName {
+  firstName: string,
+  lastName: string,
 }
 
 interface OrdersDataExtended {
@@ -62,7 +59,7 @@ const Orders = (props: Props) => {
   const [isLoadingCustomers, setIsLoadingCustomers] = useState<boolean>(false);
   const [isLoadingOrders, setIsLoadingOrders] = useState<boolean>(false);
   const [formState, setFormState] = useState<FormState>(initialFormState);
-  const [customersOptions, setCustomersOptions] = useState<CustomerOption[]>(
+  const [customersOptions, setCustomersOptions] = useState<AppSelectOption<CustomerName>[]>(
     []
   );
   const [ordersData, setOrdersData] = useState<OrdersDataExtended | null>(null);
@@ -77,12 +74,15 @@ const Orders = (props: Props) => {
       throw Error("cannot map customers to options when it is null");
     }
 
-    const allCustomersOption: AppSelectOption = {
+    const allCustomersOption: AppSelectOption<CustomerName> = {
       label: "כל הלקוחות",
-      value: "allClients",
+      value: {
+        firstName: "allClients",
+        lastName: ""
+      }
     };
 
-    const mappedCustomers: AppSelectOption[] = customers.map((c) => {
+    const mappedCustomers: AppSelectOption<CustomerName>[] = customers.map((c) => {
       return {
         label: c.firstName + " " + c.lastName,
         value: {
@@ -96,12 +96,12 @@ const Orders = (props: Props) => {
 
     setFormState({
       ...formState,
-      selectedCustomer: mappedCustomers[0],
+      selectedCustomerOption: mappedCustomers[0],
       isAllClients: mappedCustomers[0].label === "כל הלקוחות",
     });
   };
 
-  useEffect(() => {}, [formState.selectedCustomer]);
+  useEffect(() => {}, [formState.selectedCustomerOption]);
 
   useEffect(() => {
     if (customers !== null) {
@@ -131,18 +131,15 @@ const Orders = (props: Props) => {
   };
 
   const handleClickShowOrders = () => {
-    if (formState.selectedCustomer === null) {
+    if (formState.selectedCustomerOption === null) {
       return;
     }
 
     const body: OrdersRequest = {
       formObject: {
-        date: {
-          startDate: formState.currentMonth.range.startDate,
-          endDate: formState.currentMonth.range.endDate,
-        },
+        date: formState.selectedtMonthOption.value,
         isAllClients: formState.isAllClients,
-        client: formState.selectedCustomer.value,
+        client: formState.selectedCustomerOption.value,
       },
     };
 
@@ -172,21 +169,21 @@ const Orders = (props: Props) => {
           <AppSelect
             isDisabled={isLoadingCustomers}
             label="בחר לקוח"
-            defaultOption={formState.selectedCustomer ?? undefined}
+            defaultOption={formState.selectedCustomerOption ?? undefined}
             onValueChange={(newValue) => {
               setFormState({
                 ...formState,
                 isAllClients: newValue.label === "כל הלקוחות",
-                selectedCustomer: newValue,
+                selectedCustomerOption: newValue,
               });
             }}
             options={customersOptions}
           />
           <AppSelect
             label="בחר חודש"
-            defaultOption={formState.currentMonthOption}
+            defaultOption={formState.selectedtMonthOption}
             onValueChange={(newValue) => {
-              handleFormStateFieldChange("currentMonthOption", newValue);
+              handleFormStateFieldChange("selectedtMonthOption", newValue);
             }}
             options={monthsOptions}
           />

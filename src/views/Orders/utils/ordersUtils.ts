@@ -30,18 +30,18 @@ export function setMonthTime(monthNumber: number): MonthRange {
   };
 }
 
-export function getCurrentMonth(): Month {
+export function getCurrentMonthRange(): MonthRange {
   const currentDate = new Date();
   for (let i = 0; i < months.length; i++) {
     if (currentDate.getMonth() === months[i].range.startDate.getMonth()) {
-      return months[i];
+      return months[i].range;
     }
   }
 
   throw Error("Cannot find relevant month to initiate");
 }
 
-export function getCurrentMonthSelectOption(): AppSelectOption {
+export function getCurrentMonthSelectOption(): AppSelectOption<MonthRange> {
   const currentDate = new Date();
   for (let i = 0; i < months.length; i++) {
     if (currentDate.getMonth() === months[i].range.startDate.getMonth()) {
