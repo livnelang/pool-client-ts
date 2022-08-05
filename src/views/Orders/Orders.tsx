@@ -45,8 +45,8 @@ interface Props {
 }
 
 interface CustomerName {
-  firstName: string,
-  lastName: string,
+  firstName: string;
+  lastName: string;
 }
 
 interface OrdersDataExtended {
@@ -59,9 +59,9 @@ const Orders = (props: Props) => {
   const [isLoadingCustomers, setIsLoadingCustomers] = useState<boolean>(false);
   const [isLoadingOrders, setIsLoadingOrders] = useState<boolean>(false);
   const [formState, setFormState] = useState<FormState>(initialFormState);
-  const [customersOptions, setCustomersOptions] = useState<AppSelectOption<CustomerName>[]>(
-    []
-  );
+  const [customersOptions, setCustomersOptions] = useState<
+    AppSelectOption<CustomerName>[]
+  >([]);
   const [ordersData, setOrdersData] = useState<OrdersDataExtended | null>(null);
 
   const dispatch = useDispatch();
@@ -78,19 +78,21 @@ const Orders = (props: Props) => {
       label: "כל הלקוחות",
       value: {
         firstName: "allClients",
-        lastName: ""
-      }
+        lastName: "",
+      },
     };
 
-    const mappedCustomers: AppSelectOption<CustomerName>[] = customers.map((c) => {
-      return {
-        label: c.firstName + " " + c.lastName,
-        value: {
-          firstName: c.firstName,
-          lastName: c.lastName,
-        },
-      };
-    });
+    const mappedCustomers: AppSelectOption<CustomerName>[] = customers.map(
+      (c) => {
+        return {
+          label: c.firstName + " " + c.lastName,
+          value: {
+            firstName: c.firstName,
+            lastName: c.lastName,
+          },
+        };
+      }
+    );
     mappedCustomers.unshift(allCustomersOption);
     setCustomersOptions(mappedCustomers);
 
@@ -147,6 +149,7 @@ const Orders = (props: Props) => {
     api
       .getOrders(body)
       .then((res) => {
+        res.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
         const data: OrdersDataExtended = {
           orders: res,
           total: res.reduce((acc, o) => {
