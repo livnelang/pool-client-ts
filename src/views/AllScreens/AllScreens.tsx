@@ -105,7 +105,7 @@ const componentsPreview: ComponentPreview[] = [
     name: "App Select",
     element: (
       <AppSelect
-        label="בחר רכב"
+        label="בחר רכב" 
         defaultOption={{ label: "Volvo", value: "Volvo" }}
         onValueChange={() => {}}
         options={[
