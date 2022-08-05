@@ -17,7 +17,7 @@ interface Props<T> {
   isDisabled?: boolean;
 }
 
-const AppSelect = <T extends object>({
+const AppSelect = <T, >({
   options,
   onValueChange,
   defaultOption,
