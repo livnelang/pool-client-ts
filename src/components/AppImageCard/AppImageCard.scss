@@ -1,0 +1,31 @@
+.AppImageCard {
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 8px;
+    overflow: hidden;
+
+    .upperImageContainer {
+        width: inherit;
+
+        img {
+            width: inherit;
+        }
+    }
+
+    .content {
+        color: #BDBDBD;
+        padding: 8px 24px;
+
+        .header {
+            color: #828282;
+        }
+
+        .bullets {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

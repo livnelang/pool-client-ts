@@ -1,0 +1,31 @@
+.AnimatedHomeThing {
+     #glass {
+        animation: glass ease 1.2s alternate infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+    }
+
+    #character {
+        animation: character linear 3s alternate infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+    }
+}
+
+@keyframes character {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(50px);
+    }
+}
+
+@keyframes glass {
+    from {
+        transform: rotate(-30deg);
+    }
+    to {
+        transform: rotate(30deg);
+    }
+}

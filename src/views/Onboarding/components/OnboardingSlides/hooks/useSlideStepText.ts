@@ -48,7 +48,7 @@ const slideRecords: Record<number, SlideMetaData> = {
     image: image4,
     texts: {
       mainText: "בואו נצא לדרך!",
-      secondaryText: "",
+      secondaryText: "הבריכה פתוחה",
     },
     counter: 4,
   },

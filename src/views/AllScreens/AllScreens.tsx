@@ -14,6 +14,8 @@ import AppModal from "../../components/AppModal/AppModal";
 import ProfileBar from "../../components/ProfileBar/ProfileBar";
 import AppSelect from "../../components/forms/AppSelect/AppSelect";
 import AppButton from "../../components/AppButton/AppButton";
+import AppImageCard from "../../components/AppImageCard/AppImageCard";
+import AnimatedHomeThing from "../Home/components/AnimatedHomeThing/AnimatedHomeThing";
 
 interface ComponentPreview {
   name: string;
@@ -105,7 +107,7 @@ const componentsPreview: ComponentPreview[] = [
     name: "App Select",
     element: (
       <AppSelect
-        label="בחר רכב" 
+        label="בחר רכב"
         defaultOption={{ label: "Volvo", value: "Volvo" }}
         onValueChange={() => {}}
         options={[
@@ -114,6 +116,21 @@ const componentsPreview: ComponentPreview[] = [
         ]}
       />
     ),
+  },
+  {
+    name: "AppImageCard - bullets variant",
+    element: (
+      <AppImageCard
+        variant="BULLETS"
+        header="מוצרים"
+        bullets={["קולה", "קרטיב", "בירה"]}
+        imageUrl="../src/views/Home/images/beverages.jpg"
+      />
+    ),
+  },
+  {
+    name: "Animated Home Thing",
+    element: <AnimatedHomeThing />,
   },
 ];
 

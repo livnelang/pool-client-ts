@@ -1,0 +1,23 @@
+.Home {
+    direction: rtl;
+
+    .dayDaetails {
+        font-size: 24px;
+        color: #9D9CB5;
+
+        .dateAndTime {
+            display: flex;
+            justify-content: space-between;
+
+            .time {
+                background: #3BC5CE;
+                padding: 4px 8px;
+                border-radius: 8px;
+                color: #fff;
+            }
+        }
+    }
+    .content {
+        padding-bottom: 16px;
+    }
+}
