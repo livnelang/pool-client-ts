@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import APIService from "../../helpers/api/API";
-import { Customer } from "../../interfaces/Customer";
-import { setCustomersResponse } from "../../store/slices/customersSlice";
 import "./Orders.scss";
 import FormContainer from "../../components/forms/FormContainer/FormContainer";
 import AppSelect from "../../components/forms/AppSelect/AppSelect";
@@ -18,39 +14,17 @@ interface Props {
 }
 
 const Orders = (props: Props) => {
-  const { api } = props;
-  const [isLoadingCustomers, setIsLoadingCustomers] = useState<boolean>(false);
   const {
     formState,
     setFormState,
-    customers,
+    isLoadingCustomers,
     customersOptions,
     handleClickShowOrders,
     handleFormStateFieldChange,
     isLoadingOrders,
-    mapCustomersOptions,
     ordersData,
     monthsOptions,
   } = useOrders(props);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (customers !== null) {
-      mapCustomersOptions();
-      return;
-    }
-    setIsLoadingCustomers(true);
-    api
-      .getAllClients()
-      .then((res: Customer[]) => {
-        dispatch(setCustomersResponse({ customersResponse: res }));
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setIsLoadingCustomers(false));
-  }, [customers]);
 
   return (
     <div className="Orders">

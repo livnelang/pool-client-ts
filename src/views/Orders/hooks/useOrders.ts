@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { AppSelectOption } from "../../../components/forms/AppSelect/AppSelect";
 import APIService from "../../../helpers/api/API";
 import useForm from "../../../hooks/useForm";
+import { Customer } from "../../../interfaces/Customer";
 import { Order, OrdersRequest } from "../../../interfaces/Order";
 import { RootState } from "../../../store/rtkStore";
+import { setCustomersResponse } from "../../../store/slices/customersSlice";
 import {
   getCurrentMonthSelectOption,
   MonthRange,
@@ -41,9 +43,11 @@ const useOrders = ({ api }: Props) => {
   const customers = useSelector(
     (state: RootState) => state.customers.customers
   );
+  const dispatch = useDispatch();
   const { formState, setFormState, handleFormStateFieldChange } =
     useForm<FormState>(initialFormState);
 
+  const [isLoadingCustomers, setIsLoadingCustomers] = useState<boolean>(false);
   const [isLoadingOrders, setIsLoadingOrders] = useState<boolean>(false);
   const [ordersData, setOrdersData] = useState<OrdersDataExtended | null>(null);
 
@@ -123,9 +127,27 @@ const useOrders = ({ api }: Props) => {
       .finally(() => setIsLoadingOrders(false));
   };
 
+  useEffect(() => {
+    if (customers !== null) {
+      mapCustomersOptions();
+      return;
+    }
+    setIsLoadingCustomers(true);
+    api
+      .getAllClients()
+      .then((res: Customer[]) => {
+        dispatch(setCustomersResponse({ customersResponse: res }));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setIsLoadingCustomers(false));
+  }, [customers]);
+
   return {
     formState,
     setFormState,
+    isLoadingCustomers,
     customers,
     customersOptions,
     mapCustomersOptions,
