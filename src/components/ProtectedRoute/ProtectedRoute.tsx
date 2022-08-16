@@ -1,9 +1,8 @@
 import { useSelector } from "react-redux";
-import { RouteProps, Route } from "react-router";
 import { Navigate, Outlet } from "react-router-dom";
 import { RootState } from "../../store/rtkStore";
 
-export const ProtectedRoute = (props: RouteProps) => {
+export const ProtectedRoute = () => {
   const authenticationPath = "/";
 
   const isLoggedUser = useSelector(

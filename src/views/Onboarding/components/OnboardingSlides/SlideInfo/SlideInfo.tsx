@@ -1,5 +1,4 @@
 // import LazyLoad from "react-lazyload";
-import { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { SlideMetaData } from "../hooks/useSlideStepText";
 import "./SlideInfo.css";
@@ -9,8 +8,6 @@ interface SlideInfoData {
 }
 
 const SlideInfo = ({ slide }: SlideInfoData) => {
-  const [isImageReady, setIsImageReady] = useState<boolean>(false);
-
   return (
     <div className="SlideInfo">
       <div>

@@ -18,8 +18,6 @@ interface SlideIndicatorProps {
 }
 
 const SlideIndicator = (props: SlideIndicatorProps) => {
-  const arr = new Array(props.numOfSteps);
-
   const childBars: JSX.Element[] = [];
   for (let i = 1; i <= props.numOfSteps; i++) {
     childBars.push(<ChildBar key={i} isActive={props.counter === i} />);

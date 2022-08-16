@@ -1,4 +1,4 @@
-import { describe, expect, it, test } from "vitest";
+import { expect, test } from "vitest";
 import renderer from "react-test-renderer";
 import AppButton from "./AppButton";
 

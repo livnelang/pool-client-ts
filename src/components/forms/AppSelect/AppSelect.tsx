@@ -2,7 +2,6 @@ import "./AppSelect.scss";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
-
 export interface AppSelectOption<T> {
   label: string;
   value: T;
@@ -17,7 +16,7 @@ interface Props<T> {
   isDisabled?: boolean;
 }
 
-const AppSelect = <T, >({
+const AppSelect = <T,>({
   options,
   onValueChange,
   defaultOption,
@@ -49,7 +48,9 @@ const AppSelect = <T, >({
         className="react-select-class"
         options={options}
         value={selectedValue}
-        onChange={(newValue) => handleValueChange(newValue as AppSelectOption<T>)}
+        onChange={(newValue) =>
+          handleValueChange(newValue as AppSelectOption<T>)
+        }
       />
     </div>
   );

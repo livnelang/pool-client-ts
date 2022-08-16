@@ -14,7 +14,7 @@ const customersSlice = createSlice({
   initialState: customersInitialState,
   reducers: {
     setCustomersResponse: (
-      state,
+      state: CustomersState,
       { payload }: PayloadAction<{ customersResponse: Customer[] }>
     ) => {
       state.customers = payload.customersResponse;

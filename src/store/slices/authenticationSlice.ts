@@ -23,16 +23,16 @@ const authSlice = createSlice({
   initialState: authenticationInitialState,
   reducers: {
     setLoginResponse: (
-      state,
+      state: AuthenticationState,
       { payload }: PayloadAction<{ loginResponse: LoginResponse }>
     ) => {
       state.loggedUser = payload.loginResponse.loggedUser;
       state.mails = payload.loginResponse.mails;
     },
-    setSlidingIndicator: (state) => {
+    setSlidingIndicator: (state: AuthenticationState) => {
       state.seenOnboardingSlides = !state.seenOnboardingSlides;
     },
-    removeLoggedUser: (state) => {
+    removeLoggedUser: (state: AuthenticationState) => {
       state.loggedUser = null;
       state.mails = null;
     },

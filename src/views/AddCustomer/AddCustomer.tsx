@@ -65,7 +65,7 @@ const AddCustomer = (props: Props) => {
       newClient: addCustomerForm.fields,
     };
     addCustomer(body)
-      .then((res) => {
+      .then(() => {
         // props.onSuccessFullLogin(res);
         setModalType("SUCCESS");
       })

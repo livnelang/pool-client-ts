@@ -6,7 +6,10 @@ import {
 } from "axios";
 import { LoggedUser } from "../../interfaces/Authentication";
 import { store } from "../../store/rtkStore";
-import { removeLoggedUser, setSlidingIndicator } from "../../store/slices/authenticationSlice";
+import {
+  removeLoggedUser,
+  setSlidingIndicator,
+} from "../../store/slices/authenticationSlice";
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   const loggedUser: LoggedUser | null = store.getState().auth.loggedUser;

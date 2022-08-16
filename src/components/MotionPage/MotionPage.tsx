@@ -1,4 +1,4 @@
-import { Component, ComponentType } from "react";
+import { ComponentType } from "react";
 import { motion } from "framer-motion";
 
 const MotionPage = <T extends {}>(Component: ComponentType<T>) => {
