@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { CgSpinner } from "react-icons/cg";
 import AppButton from "../../components/AppButton/AppButton";
-import AppModal, {
-  BaseModalProps,
-} from "../../components/AppModal/AppModal";
+import AppModal, { BaseModalProps } from "../../components/AppModal/AppModal";
 import FormContainer from "../../components/forms/FormContainer/FormContainer";
 import InputField from "../../components/forms/InputField/InputField";
 import PageHeader from "../../components/PageHeader/PageHeader";
