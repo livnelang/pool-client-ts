@@ -45,7 +45,7 @@ const useLoginPageHook = () => {
     value: LoginFormFields[P]
   ) => {
     setloginDetails({
-      errors: loginDetails.errors,
+      ...loginDetails,
       fields: {
         ...loginDetails.fields,
         [key]: value,

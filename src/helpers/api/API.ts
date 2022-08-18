@@ -1,7 +1,8 @@
 import axios from "axios";
 import { LoginRequest, LoginResponse } from "../../interfaces/Authentication";
 import { Customer, NewCustomerRequest } from "../../interfaces/Customer";
-import { Order, OrdersRequest } from "../../interfaces/Order";
+import { AddOrderRequest, Order, OrdersRequest } from "../../interfaces/Order";
+import { Product } from "../../interfaces/Product";
 import { setupInterceptorsTo } from "./interceptors";
 
 // const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -18,7 +19,7 @@ class APIService {
     return axios.post(BASE_URL + "getAllClients").then((res) => res.data);
   }
 
-  public async getAllProducts(): Promise<any> {
+  public async getAllProducts(): Promise<Product[]> {
     return axios.post(BASE_URL + "getAllProducts").then((res) => res.data);
   }
 
@@ -28,6 +29,10 @@ class APIService {
 
   public async addCustomer(body: NewCustomerRequest): Promise<any> {
     return axios.post(BASE_URL + "addClient", body).then((res) => res.data);
+  }
+
+  public async addOrder(body: AddOrderRequest): Promise<any> {
+    return axios.post(BASE_URL + "addOrder2", body).then((res) => res.data);
   }
 
   public async getOrders(body: OrdersRequest): Promise<Order[]> {

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { CgSpinner } from "react-icons/cg";
 import AppButton from "../../components/AppButton/AppButton";
-import AppModal, { BaseModalProps } from "../../components/AppModal/AppModal";
+import AppModal, {
+  BaseModalProps,
+} from "../../components/AppModal/AppModal";
 import FormContainer from "../../components/forms/FormContainer/FormContainer";
 import InputField from "../../components/forms/InputField/InputField";
 import PageHeader from "../../components/PageHeader/PageHeader";
@@ -9,6 +11,8 @@ import APIService from "../../helpers/api/API";
 import useModal from "../../hooks/useModal";
 import { NewCustomerRequest } from "../../interfaces/Customer";
 import useAddCustomerFormHook from "./hooks/useAddCustomerFormHook";
+
+type ResponseType = "SUCCESS" | "FAIL";
 
 export interface AddCustomerFormFields {
   firstName: string;
@@ -24,18 +28,16 @@ interface Props {
   api: APIService;
 }
 
-type ModalType = "SUCCESS" | "FAIL";
-
-let modalTypeOptions: Record<ModalType, BaseModalProps> = {
+let modalTypeOptions: Record<ResponseType, BaseModalProps> = {
   SUCCESS: {
     text: "לקוח נוסף בהצלחה",
-    type: "success",
+    type: "SUCCESS",
     secondaryText: "כעת ניתן להוסיף, לצפות בהזמנות הלקוח",
     confirmButtonText: "אישור",
   },
   FAIL: {
     text: "ההוספה נכשלה",
-    type: "fail",
+    type: "FAIL",
     confirmButtonText: "סגירה",
   },
 };
@@ -48,7 +50,7 @@ const AddCustomer = (props: Props) => {
 
   const [isLoading, setisLoading] = useState<boolean>(false);
   const { isModalOpen, setIsModalOpen } = useModal();
-  const [modalType, setModalType] = useState<ModalType>("SUCCESS");
+  const [modalType, setModalType] = useState<ResponseType>("SUCCESS");
 
   const handleClickSubmitForm = () => {
     if (addCustomerForm === null) {

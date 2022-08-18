@@ -6,5 +6,9 @@
     label {
         font-size: 18px;
         margin-bottom: 8px;
+
+        &.error {
+            color: #db4343;
+        }
     }
 }

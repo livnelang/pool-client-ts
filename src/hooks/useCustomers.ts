@@ -5,7 +5,6 @@ import APIService from "../helpers/api/API";
 import { Customer } from "../interfaces/Customer";
 import { RootState } from "../store/rtkStore";
 import { setCustomersResponse } from "../store/slices/customersSlice";
-import { CustomerName } from "../views/Orders/hooks/useOrders";
 
 interface Props {
   api: APIService;
@@ -17,7 +16,7 @@ const useCustomers = ({ api }: Props) => {
   );
   const [isLoadingCustomers, setIsLoadingCustomers] = useState<boolean>(false);
   const [customersOptions, setCustomersOptions] = useState<
-    AppSelectOption<CustomerName>[]
+    AppSelectOption<Customer>[]
   >([]);
   const dispatch = useDispatch();
 
@@ -26,25 +25,21 @@ const useCustomers = ({ api }: Props) => {
       throw Error("cannot map customers to options when it is null");
     }
 
-    const allCustomersOption: AppSelectOption<CustomerName> = {
+    const allCustomersOption: AppSelectOption<Customer> = {
       label: "כל הלקוחות",
       value: {
+        id: "-1",
         firstName: "allClients",
         lastName: "",
       },
     };
 
-    const mappedCustomers: AppSelectOption<CustomerName>[] = customers.map(
-      (c) => {
-        return {
-          label: c.firstName + " " + c.lastName,
-          value: {
-            firstName: c.firstName,
-            lastName: c.lastName,
-          },
-        };
-      }
-    );
+    const mappedCustomers: AppSelectOption<Customer>[] = customers.map((c) => {
+      return {
+        label: c.firstName + " " + c.lastName,
+        value: c,
+      };
+    });
     mappedCustomers.unshift(allCustomersOption);
     setCustomersOptions(mappedCustomers);
   };

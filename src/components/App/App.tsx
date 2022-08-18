@@ -11,6 +11,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import AddCustomer from "../../views/AddCustomer/AddCustomer";
 import Home from "../../views/Home/Home";
 import Orders from "../../views/Orders/Orders";
+import AddOrder from "../../views/AddOrder/AddOrder";
 
 const App = () => {
   const api = new APIService();
@@ -22,12 +23,13 @@ const App = () => {
             <Route path="/" element={<Onboarding api={api} />}></Route>
             <Route path="/screens" element={<AllScreens />}></Route>
             <Route element={<ProtectedRoute />}>
-              <Route path="/main/" element={<Main api={api} />}>
+              <Route path="/main/" element={<Main />}>
                 <Route index element={<Home />} />
                 <Route
                   path="/main/addCustomer"
                   element={<AddCustomer api={api} />}
                 />
+                <Route path="/main/addOrder" element={<AddOrder api={api} />} />
                 <Route path="/main/orders" element={<Orders api={api} />} />
               </Route>
             </Route>

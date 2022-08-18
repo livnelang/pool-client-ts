@@ -22,3 +22,10 @@ export interface OrdersRequest {
     isAllClients: boolean;
   };
 }
+
+export interface AddOrderRequest {
+  userId: string;
+  productId: string;
+  quantity: number;
+  date: Date;
+}

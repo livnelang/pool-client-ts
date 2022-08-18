@@ -106,7 +106,7 @@ const LoginPage = (props: LoginPageProps) => {
         text="שגיאה"
         secondaryText="פרטי התחברות אינם נכונים"
         confirmButtonText="אישור"
-        type="fail"
+        type="FAIL"
       />
     </>
   );

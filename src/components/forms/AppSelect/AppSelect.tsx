@@ -14,6 +14,7 @@ interface Props<T> {
   defaultOption?: AppSelectOption<T>;
   placeholder?: string;
   isDisabled?: boolean;
+  error?: boolean;
 }
 
 const AppSelect = <T,>({
@@ -23,6 +24,7 @@ const AppSelect = <T,>({
   label,
   placeholder,
   isDisabled,
+  error,
 }: Props<T>) => {
   const [selectedValue, setSelectedValue] = useState<AppSelectOption<T> | null>(
     null
@@ -41,7 +43,9 @@ const AppSelect = <T,>({
 
   return (
     <div className="AppSelect">
-      <label>{label}</label>
+      <label className={`react-select-class ${error ? "error" : ""}`}>
+        {label}
+      </label>
       <Select
         isDisabled={isDisabled ?? false}
         placeholder={placeholder ?? ""}

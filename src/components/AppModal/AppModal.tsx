@@ -13,7 +13,7 @@ import {
   FaInfoCircle,
 } from "react-icons/fa";
 
-type AppModalType = "success" | "fail" | "info";
+export type AppModalType = "SUCCESS" | "FAIL" | "INFO";
 
 export interface BaseModalProps {
   text: string;
@@ -34,9 +34,9 @@ const AppModal = (props: AppModalProps) => {
     props;
 
   const iconType: JSX.Element =
-    type === "success" ? (
+    type === "SUCCESS" ? (
       <FaRegCheckCircle className="success" />
-    ) : type === "fail" ? (
+    ) : type === "FAIL" ? (
       <FaRegTimesCircle className="failure" />
     ) : (
       <FaInfoCircle className="info" />
