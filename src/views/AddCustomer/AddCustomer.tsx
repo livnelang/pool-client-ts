@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CgSpinner } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 import AppButton from "../../components/AppButton/AppButton";
 import AppModal, { BaseModalProps } from "../../components/AppModal/AppModal";
 import FormContainer from "../../components/forms/FormContainer/FormContainer";
@@ -47,8 +48,9 @@ const AddCustomer = (props: Props) => {
     useAddCustomerFormHook();
 
   const [isLoading, setisLoading] = useState<boolean>(false);
-  const { isModalOpen, setIsModalOpen } = useModal();
   const [modalType, setModalType] = useState<ResponseType>("SUCCESS");
+  const { isModalOpen, setIsModalOpen } = useModal();
+  const navigate = useNavigate();
 
   const handleClickSubmitForm = () => {
     if (addCustomerForm === null) {
@@ -66,7 +68,6 @@ const AddCustomer = (props: Props) => {
     };
     addCustomer(body)
       .then(() => {
-        // props.onSuccessFullLogin(res);
         setModalType("SUCCESS");
       })
       .catch((err) => {
@@ -79,6 +80,13 @@ const AddCustomer = (props: Props) => {
       });
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    if (modalType === "SUCCESS") {
+      navigate("/main/orders");
+    }
+  };
+
   return (
     <div className="AddCustomer">
       <PageHeader text="הוספת לקוח חדש" />
@@ -87,12 +95,14 @@ const AddCustomer = (props: Props) => {
           <InputField
             label="שם"
             type="text"
+            placeholder="הקלד שם"
             onChange={(e) => handleFormFieldChange("firstName", e.target.value)}
             error={addCustomerForm.errors.firstName}
           />
           <InputField
             label="שם משפחה"
             type="text"
+            placeholder="הקלד שם משפחה"
             onChange={(e) => handleFormFieldChange("lastName", e.target.value)}
             error={addCustomerForm.errors.lastName}
           />
@@ -109,7 +119,7 @@ const AddCustomer = (props: Props) => {
       </FormContainer>
       <AppModal
         isOpen={isModalOpen}
-        onCloseModal={() => setIsModalOpen(false)}
+        onCloseModal={handleCloseModal}
         {...modalTypeOptions[modalType]}
       />
     </div>
