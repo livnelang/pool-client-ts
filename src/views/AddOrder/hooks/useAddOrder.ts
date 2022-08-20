@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BaseModalProps } from "../../../components/AppModal/AppModal";
 import { AppSelectOption } from "../../../components/forms/AppSelect/AppSelect";
 import APIService from "../../../helpers/api/API";
@@ -39,13 +40,12 @@ const initialFormState: FormState = {
 
 let modalTypeOptions: Record<ResponseType, BaseModalProps> = {
   SUCCESS: {
-    text: "לקוח נוסף בהצלחה",
+    text: "ההזמנה נשמרה בהצלחה",
     type: "SUCCESS",
-    secondaryText: "כעת ניתן להוסיף, לצפות בהזמנות הלקוח",
     confirmButtonText: "אישור",
   },
   FAIL: {
-    text: "ההוספה נכשלה",
+    text: "ההזמנה נכשלה",
     type: "FAIL",
     confirmButtonText: "סגירה",
   },
@@ -62,10 +62,11 @@ const useAddOrder = (props: Props) => {
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { isModalOpen, setIsModalOpen } = useModal();
+  const navigate = useNavigate();
 
   const { isLoadingCustomers, customersOptions } = useCustomers(props);
   const { isLoadingProducts, proudctsOptions } = useProducts(props);
-  const [modalType, setModalType] = useState<ResponseType>("SUCCESS");
+  const [modalType, setModalType] = useState<ResponseType | null>("SUCCESS");
 
   const toggleFieldErrorState = (fieldKey: string, isError: boolean) => {
     setFormState((state) => {
@@ -78,10 +79,6 @@ const useAddOrder = (props: Props) => {
       };
     });
   };
-
-  useEffect(() => {
-    console.log("useAddorder formState changed: ", formState.errors);
-  }, [formState]);
 
   const validateForm = (): boolean => {
     for (const [fieldKey, fieldValue] of Object.entries(formState.fields)) {
@@ -121,15 +118,24 @@ const useAddOrder = (props: Props) => {
 
     setIsSubmitting(true);
 
+    const now = new Date();
+    formState.fields.date!.setHours(now.getHours());
+    formState.fields.date!.setMinutes(now.getMinutes());
+    const formattedTime = new Intl.DateTimeFormat("en", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    }).format(formState.fields.date!);
     const body: AddOrderRequest = {
-      userId: formState.fields.selectedCustomerOption!.value.id,
+      clientId: formState.fields.selectedCustomerOption!.value.id,
       productId: formState.fields.selectedtProductOption!.value.id,
       quantity: formState.fields.quantity!,
-      date: formState.fields.date!,
+      date: formattedTime,
     };
     addOrder(body)
       .then(() => {
-        // props.onSuccessFullLogin(res);
         setModalType("SUCCESS");
       })
       .catch((err) => {
@@ -140,6 +146,15 @@ const useAddOrder = (props: Props) => {
         setIsSubmitting(false);
         setIsModalOpen(true);
       });
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+
+    if (modalType === "SUCCESS") {
+      navigate("/main/orders");
+    }
+    setModalType(null);
   };
 
   return {
@@ -155,6 +170,9 @@ const useAddOrder = (props: Props) => {
     isLoadingProducts,
     proudctsOptions,
     isModalOpen,
+    modalType,
+    modalTypeOptions,
+    handleCloseModal,
   };
 };
 

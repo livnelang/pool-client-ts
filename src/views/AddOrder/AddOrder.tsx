@@ -1,6 +1,6 @@
-import { useEffect } from "react";
 import { CgSpinner } from "react-icons/cg";
 import AppButton from "../../components/AppButton/AppButton";
+import AppModal from "../../components/AppModal/AppModal";
 import AppSelect from "../../components/forms/AppSelect/AppSelect";
 import FormContainer from "../../components/forms/FormContainer/FormContainer";
 import InputField from "../../components/forms/InputField/InputField";
@@ -23,11 +23,12 @@ const AddOrder = (props: Props) => {
     customersOptions,
     isLoadingProducts,
     proudctsOptions,
+    isModalOpen,
+    modalType,
+    modalTypeOptions,
+    handleCloseModal,
   } = useAddOrder(props);
 
-  useEffect(() => {
-    console.log("errors changed: ", formState.errors);
-  }, [formState.errors]);
   return (
     <div>
       <PageHeader text="הוספת הזמנה" />
@@ -65,10 +66,12 @@ const AddOrder = (props: Props) => {
             error={formState.errors.quantity}
           />
           <InputField
-            label="כמות"
+            label="תאריך"
             type="date"
             placeholder="בחר תאריך"
-            onChange={(e) => handleFormStateFieldChange("date", e.target.value)}
+            onChange={(e) =>
+              handleFormStateFieldChange("date", new Date(e.target.value))
+            }
             error={formState.errors.date}
           />
         </form>
@@ -82,6 +85,13 @@ const AddOrder = (props: Props) => {
           {isSubmitting ? <CgSpinner className="spinner" /> : null}
         </AppButton>
       </FormContainer>
+      {modalType && isModalOpen ? (
+        <AppModal
+          isOpen={isModalOpen && modalType !== null}
+          onCloseModal={handleCloseModal}
+          {...modalTypeOptions[modalType]}
+        />
+      ) : null}
     </div>
   );
 };

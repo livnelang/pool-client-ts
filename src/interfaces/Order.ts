@@ -24,8 +24,8 @@ export interface OrdersRequest {
 }
 
 export interface AddOrderRequest {
-  userId: string;
+  clientId: string;
   productId: string;
   quantity: number;
-  date: Date;
+  date: string;
 }
