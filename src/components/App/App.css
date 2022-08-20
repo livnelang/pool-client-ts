@@ -4,5 +4,5 @@
   flex-direction: column;
   align-items: center;
   margin: 24px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }

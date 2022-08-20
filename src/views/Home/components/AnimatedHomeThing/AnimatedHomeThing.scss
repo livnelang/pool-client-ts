@@ -1,4 +1,6 @@
 .AnimatedHomeThing {
+    display: flex;
+    justify-content: center;
      #glass {
         animation: glass ease 1.2s alternate infinite;
         transform-box: fill-box;
