@@ -9,13 +9,13 @@ import { Order, OrdersRequest } from "../../../interfaces/Order";
 import { RootState } from "../../../store/rtkStore";
 import {
   getCurrentMonthSelectOption,
-  MonthRange,
+  Month,
   months,
 } from "../utils/ordersUtils";
 
 interface FormState {
   selectedCustomerOption: AppSelectOption<CustomerName> | null;
-  selectedtMonthOption: AppSelectOption<MonthRange>;
+  selectedtMonthOption: AppSelectOption<Month>;
   isAllClients: boolean;
 }
 
@@ -52,10 +52,10 @@ const useOrders = (props: Props) => {
 
   const { isLoadingCustomers, customersOptions } = useCustomers(props);
 
-  const monthsOptions: AppSelectOption<MonthRange>[] = months.map((m) => {
+  const monthsOptions: AppSelectOption<Month>[] = months.map((m) => {
     return {
       label: m.name,
-      value: m.range,
+      value: m,
     };
   });
 
@@ -76,7 +76,7 @@ const useOrders = (props: Props) => {
 
     const body: OrdersRequest = {
       formObject: {
-        date: formState.selectedtMonthOption.value,
+        date: formState.selectedtMonthOption.value.range,
         isAllClients: formState.isAllClients,
         client: formState.selectedCustomerOption.value,
       },

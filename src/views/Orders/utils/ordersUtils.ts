@@ -41,13 +41,13 @@ export function getCurrentMonthRange(): MonthRange {
   throw Error("Cannot find relevant month to initiate");
 }
 
-export function getCurrentMonthSelectOption(): AppSelectOption<MonthRange> {
+export function getCurrentMonthSelectOption(): AppSelectOption<Month> {
   const currentDate = new Date();
   for (let i = 0; i < months.length; i++) {
     if (currentDate.getMonth() === months[i].range.startDate.getMonth()) {
       return {
         label: months[i].name,
-        value: months[i].range,
+        value: months[i],
       };
     }
   }

@@ -8,6 +8,9 @@ import AppButton from "../../components/AppButton/AppButton";
 import OrdersTotalAmount from "./components/OrdersTotalAmount/OrdersTotalAmount";
 import { LinearProgress } from "@mui/material";
 import useOrders from "./hooks/useOrders";
+import MailDialog from "./components/MailDialog/MailDialog";
+import useMailDialog from "./components/MailDialog/hooks/useMailDialog";
+import IsDefined from "../../components/IsDefined/IsDefined";
 
 interface Props {
   api: APIService;
@@ -25,6 +28,10 @@ const Orders = (props: Props) => {
     ordersData,
     monthsOptions,
   } = useOrders(props);
+  const { isMailsDialogOpen, setIsMailsDialogOpen } = useMailDialog({
+    isAllClients: formState.isAllClients,
+    selectedMonth: formState.selectedtMonthOption.value,
+  });
 
   return (
     <div className="Orders">
@@ -58,7 +65,11 @@ const Orders = (props: Props) => {
             text="הצג"
             onClick={() => handleClickShowOrders()}
           />
-          <AppButton size="small" text="שלח במייל" onClick={() => {}} />
+          <AppButton
+            size="small"
+            text="שלח במייל"
+            onClick={() => setIsMailsDialogOpen(true)}
+          />
           {isLoadingOrders ? (
             <LinearProgress />
           ) : ordersData === null ? null : (
@@ -72,6 +83,13 @@ const Orders = (props: Props) => {
           )}
         </form>
       </FormContainer>
+      <IsDefined value={isMailsDialogOpen}>
+        <MailDialog
+          isAllClients={formState.isAllClients}
+          selectedMonth={formState.selectedtMonthOption.value}
+          setIsMailsDialogOpen={setIsMailsDialogOpen}
+        />
+      </IsDefined>
     </div>
   );
 };
