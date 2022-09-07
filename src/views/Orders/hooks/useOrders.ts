@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { AppSelectOption } from "../../../components/forms/AppSelect/AppSelect";
 import APIService from "../../../helpers/api/API";
 import useCustomers from "../../../hooks/useCustomers";
-import useForm from "../../../hooks/useForm";
+import useCustomForm from "../../../hooks/useCustomForm";
 import { Order, OrdersRequest } from "../../../interfaces/Order";
 import { RootState } from "../../../store/rtkStore";
 import {
@@ -45,7 +45,7 @@ const useOrders = (props: Props) => {
     (state: RootState) => state.customers.customers
   );
   const { formState, setFormState, handleFormStateFieldChange } =
-    useForm<FormState>(initialFormState);
+    useCustomForm<FormState>(initialFormState);
 
   const [isLoadingOrders, setIsLoadingOrders] = useState<boolean>(false);
   const [ordersData, setOrdersData] = useState<OrdersDataExtended | null>(null);

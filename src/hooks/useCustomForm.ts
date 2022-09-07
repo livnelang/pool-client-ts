@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useForm = <T>(formInitialState: T) => {
+const useCustomForm = <T>(formInitialState: T) => {
   const [formState, setFormState] = useState<T>(formInitialState);
   const handleFormStateFieldChange = <P extends keyof T>(
     key: P,
@@ -15,4 +15,4 @@ const useForm = <T>(formInitialState: T) => {
   return { formState, setFormState, handleFormStateFieldChange };
 };
 
-export default useForm;
+export default useCustomForm;
