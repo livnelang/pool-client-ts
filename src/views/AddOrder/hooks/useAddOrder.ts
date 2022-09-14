@@ -121,18 +121,11 @@ const useAddOrder = (props: Props) => {
     const now = new Date();
     formState.fields.date!.setHours(now.getHours());
     formState.fields.date!.setMinutes(now.getMinutes());
-    const formattedTime = new Intl.DateTimeFormat("en", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    }).format(formState.fields.date!);
     const body: AddOrderRequest = {
       clientId: formState.fields.selectedCustomerOption!.value.id,
       productId: formState.fields.selectedtProductOption!.value.id,
       quantity: formState.fields.quantity!,
-      date: formattedTime,
+      date: formState.fields.date!.toString(),
     };
     addOrder(body)
       .then(() => {
