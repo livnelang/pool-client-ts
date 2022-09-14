@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  AppMails,
   LoggedUser,
   LoginResponse,
 } from "../../interfaces/Authentication";
+import { AppMails } from "../../interfaces/Mail";
 
 export interface AuthenticationState {
   loggedUser: LoggedUser | null;
