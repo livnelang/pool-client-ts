@@ -5,6 +5,7 @@ import AppButton from "../../components/AppButton/AppButton";
 import AppModal, { BaseModalProps } from "../../components/AppModal/AppModal";
 import FormContainer from "../../components/forms/FormContainer/FormContainer";
 import InputField from "../../components/forms/InputField/InputField";
+import MotionPage from "../../components/MotionPage/MotionPage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import APIService from "../../helpers/api/API";
 import useModal from "../../hooks/useModal";
@@ -126,4 +127,4 @@ const AddCustomer = (props: Props) => {
   );
 };
 
-export default AddCustomer;
+export default MotionPage(AddCustomer);

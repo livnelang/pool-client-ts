@@ -11,6 +11,7 @@ import useOrders from "./hooks/useOrders";
 import MailDialog from "./components/MailDialog/MailDialog";
 import useMailDialog from "./components/MailDialog/hooks/useMailDialog";
 import IsDefined from "../../components/IsDefined/IsDefined";
+import MotionPage from "../../components/MotionPage/MotionPage";
 
 interface Props {
   api: APIService;
@@ -96,4 +97,4 @@ const Orders = (props: Props) => {
   );
 };
 
-export default Orders;
+export default MotionPage(Orders);

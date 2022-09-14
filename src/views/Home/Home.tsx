@@ -1,6 +1,7 @@
 import "./Home.scss";
 import AnimatedHomeThing from "./components/AnimatedHomeThing/AnimatedHomeThing";
 import useDateHook from "./hooks/useDateHook";
+import MotionPage from "../../components/MotionPage/MotionPage";
 
 const Home = () => {
   const { concatedFormattedDate, dayText, formattedTime } = useDateHook();
@@ -21,4 +22,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MotionPage(Home);

@@ -4,6 +4,7 @@ import AppModal from "../../components/AppModal/AppModal";
 import AppSelect from "../../components/forms/AppSelect/AppSelect";
 import FormContainer from "../../components/forms/FormContainer/FormContainer";
 import InputField from "../../components/forms/InputField/InputField";
+import MotionPage from "../../components/MotionPage/MotionPage";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import APIService from "../../helpers/api/API";
 import "./AddOrder.scss";
@@ -96,4 +97,4 @@ const AddOrder = (props: Props) => {
   );
 };
 
-export default AddOrder;
+export default MotionPage(AddOrder);
