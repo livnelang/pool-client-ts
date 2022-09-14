@@ -1,3 +1,5 @@
+import { AppMails } from "./Mail";
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -6,12 +8,6 @@ export interface LoginRequest {
 export interface LoggedUser {
   userName: string;
   token: string;
-}
-
-export interface AppMails {
-  defaultMailAddress: string;
-  ownerMailAddress: string;
-  extraAccountantMail: string;
 }
 
 export interface LoginResponse {

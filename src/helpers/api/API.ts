@@ -1,6 +1,7 @@
 import axios from "axios";
 import { LoginRequest, LoginResponse } from "../../interfaces/Authentication";
 import { Customer, NewCustomerRequest } from "../../interfaces/Customer";
+import { SendOrderByMailRequest } from "../../interfaces/Mail";
 import { AddOrderRequest, Order, OrdersRequest } from "../../interfaces/Order";
 import { Product } from "../../interfaces/Product";
 import { setupInterceptorsTo } from "./interceptors";
@@ -37,6 +38,12 @@ class APIService {
 
   public async getOrders(body: OrdersRequest): Promise<Order[]> {
     return axios.post(BASE_URL + "getOrders", body).then((res) => res.data);
+  }
+
+  public async sendOrdersByMail(body: SendOrderByMailRequest): Promise<void> {
+    return axios
+      .post(BASE_URL + "sendMonthlyOrdersByEmail", body)
+      .then((res) => res.data);
   }
 }
 

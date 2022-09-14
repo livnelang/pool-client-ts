@@ -1,0 +1,18 @@
+.mailDialogActions {
+    display: flex !important;
+    justify-content: center !important;
+    padding: 8px 24px !important;
+
+    .sendBtn {
+        width: 100% !important;
+
+        span {
+            margin-right: 8px;
+        }
+
+        .MuiCircularProgress-root {
+            width: 14px !important;
+            height: 14px !important;
+        }
+    }
+}

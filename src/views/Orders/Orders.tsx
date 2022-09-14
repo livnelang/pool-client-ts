@@ -31,6 +31,7 @@ const Orders = (props: Props) => {
   const { isMailsDialogOpen, setIsMailsDialogOpen } = useMailDialog({
     isAllClients: formState.isAllClients,
     selectedMonth: formState.selectedtMonthOption.value,
+    api: props.api,
   });
 
   return (
@@ -88,6 +89,7 @@ const Orders = (props: Props) => {
           isAllClients={formState.isAllClients}
           selectedMonth={formState.selectedtMonthOption.value}
           setIsMailsDialogOpen={setIsMailsDialogOpen}
+          api={props.api}
         />
       </IsDefined>
     </div>
