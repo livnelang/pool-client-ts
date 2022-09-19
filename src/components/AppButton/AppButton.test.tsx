@@ -1,16 +1,12 @@
-import { expect, test } from "vitest";
-import renderer from "react-test-renderer";
+import { describe, expect, test } from "vitest";
+import { render, screen } from "@testing-library/react";
 import AppButton from "./AppButton";
+import "@testing-library/jest-dom";
 
-function toJson(component: renderer.ReactTestRenderer) {
-  const result = component.toJSON();
-  expect(result).toBeDefined();
-  expect(result).not.toBeInstanceOf(Array);
-  return result as renderer.ReactTestRendererJSON;
-}
-
-test("Link changes the class when hovered", () => {
-  const component = renderer.create(<AppButton text="Button Test" />);
-  let tree = toJson(component);
-  expect(tree).toMatchSnapshot();
+describe("AppButton", () => {
+  test("should render AppButton with an 'submit' text", () => {
+    render(<AppButton text="Submit" />);
+    const linkElement = screen.getByText("Submit");
+    expect(linkElement).toBeInTheDocument();
+  });
 });
