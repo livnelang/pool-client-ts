@@ -17,6 +17,8 @@ export const months: Month[] = [
   { name: "אוגוסט", range: setMonthTime(7) },
   { name: "ספטמבר", range: setMonthTime(8) },
   { name: "אוקטובר", range: setMonthTime(9) },
+  { name: "נובמבר", range: setMonthTime(10) },
+
 ];
 
 export function setMonthTime(monthNumber: number): MonthRange {
