@@ -7,6 +7,7 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
+import { CgSpinner } from "react-icons/cg";
 import {
   FaRegCheckCircle,
   FaRegTimesCircle,
@@ -22,15 +23,18 @@ export interface BaseModalProps {
   type?: AppModalType;
 }
 
-interface AppModalProps extends BaseModalProps {
+export interface AppModalProps extends BaseModalProps {
   isOpen: boolean;
   onCloseModal: () => void;
+  onConfirm?: () => void;
+  isConfirmButtonDisabled?: boolean
+  showSpinner?: boolean
 }
 
 const DEFAULT_CONFIRM_TEXT = "סגירה";
 
 const AppModal = (props: AppModalProps) => {
-  const { isOpen, onCloseModal, text, secondaryText, confirmButtonText, type } =
+  const { isOpen, onCloseModal, isConfirmButtonDisabled,  onConfirm,  text, secondaryText, confirmButtonText, type, showSpinner } =
     props;
 
   const iconType: JSX.Element =
@@ -61,9 +65,10 @@ const AppModal = (props: AppModalProps) => {
       </DialogContent>
       <DialogActions>
         {/* <Button onClick={onCloseModal}>Disagree</Button> */}
-        <Button onClick={onCloseModal} autoFocus>
+        <Button onClick={onConfirm ?? onCloseModal} disabled={isConfirmButtonDisabled} autoFocus>
           {confirmButtonText ?? DEFAULT_CONFIRM_TEXT}
         </Button>
+        {showSpinner && <CgSpinner className="spinner" />}
       </DialogActions>
     </Dialog>
   );

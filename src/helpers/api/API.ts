@@ -8,8 +8,8 @@ import { setupInterceptorsTo } from "./interceptors";
 
 // const BASE_URL = import.meta.env.VITE_BASE_URL;
 // const BASE_URL = "https://oz-pool.herokuapp.com/api/";
-const BASE_URL = "https://ozpoolws-livnelang.b4a.run/api/";
-// const BASE_URL = "http://localhost:5000/api/";
+export const BASE_URL = "https://ozpoolws-livnelang.b4a.run/api/";
+// export const BASE_URL = "http://localhost:5000/api/";
 
 // setupInterceptorsTo(axios);https://ozpoolws-livnelang.b4a.run/
 

@@ -29,3 +29,6 @@ export interface AddOrderRequest {
   quantity: number;
   date: string;
 }
+export interface DeleteOrderRequest {
+  orderObjectId: string;
+}

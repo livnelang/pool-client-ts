@@ -12,30 +12,37 @@ import AddCustomer from "../../views/AddCustomer/AddCustomer";
 import Home from "../../views/Home/Home";
 import Orders from "../../views/Orders/Orders";
 import AddOrder from "../../views/AddOrder/AddOrder";
+import { QueryClient, QueryClientProvider } from "react-query";
+const queryClient = new QueryClient();
 
 const App = () => {
   const api = new APIService();
   return (
     <div className="App">
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <Routes>
-            <Route path="/" element={<Onboarding api={api} />}></Route>
-            <Route path="/screens" element={<AllScreens />}></Route>
-            <Route element={<ProtectedRoute />}>
-              <Route path="/main/" element={<Main />}>
-                <Route index element={<Home />} />
-                <Route
-                  path="/main/addCustomer"
-                  element={<AddCustomer api={api} />}
-                />
-                <Route path="/main/addOrder" element={<AddOrder api={api} />} />
-                <Route path="/main/orders" element={<Orders api={api} />} />
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <Routes>
+              <Route path="/" element={<Onboarding api={api} />}></Route>
+              <Route path="/screens" element={<AllScreens />}></Route>
+              <Route element={<ProtectedRoute />}>
+                <Route path="/main/" element={<Main />}>
+                  <Route index element={<Home />} />
+                  <Route
+                    path="/main/addCustomer"
+                    element={<AddCustomer api={api} />}
+                  />
+                  <Route
+                    path="/main/addOrder"
+                    element={<AddOrder api={api} />}
+                  />
+                  <Route path="/main/orders" element={<Orders api={api} />} />
+                </Route>
               </Route>
-            </Route>
-          </Routes>
-        </PersistGate>
-      </Provider>
+            </Routes>
+          </PersistGate>
+        </Provider>
+      </QueryClientProvider>
     </div>
   );
 };

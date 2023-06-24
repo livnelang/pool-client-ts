@@ -80,7 +80,12 @@ const Orders = (props: Props) => {
                 sum={ordersData.total}
                 isAllClients={formState.isAllClients}
               />
-              {ordersData ? <OrdersTable rows={ordersData.orders} /> : null}
+              {ordersData ? (
+                <OrdersTable
+                  rows={ordersData.orders}
+                  refreshTable={handleClickShowOrders}
+                />
+              ) : null}
             </>
           )}
         </form>
